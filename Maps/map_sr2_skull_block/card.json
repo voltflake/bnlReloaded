@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_skull_block",
+  "scope": "public",
+  "name": {
+    "text": "Skull Block",
+    "data": {
+      "es": {
+        "original": "Skull Block",
+        "translation": "Skull Block"
+      },
+      "fr": {
+        "original": "Skull Block",
+        "translation": "Skull Block"
+      },
+      "de": {
+        "original": "Skull Block",
+        "translation": "Skull Block"
+      },
+      "pt": {
+        "original": "Skull Block",
+        "translation": "Skull Block"
+      },
+      "ru": {
+        "original": "Skull Block",
+        "translation": "Skull Block"
+      }
+    }
+  },
+  "description": {
+    "text": "Isolated islands form a formidable defence. Hold strong and counter hard across no-man's land. One Base.",
+    "data": {
+      "es": {
+        "original": "Isolated islands form a formidable defence. Hold strong and counter hard across no-man's land. One Base.",
+        "translation": "Islas aisladas que forman una defensa formidable.\nUn núcleo."
+      },
+      "fr": {
+        "original": "Isolated islands form a formidable defence. Hold strong and counter hard across no-man's land. One Base.",
+        "translation": "Les îles isolées constituent une défense formidable. Tenez bon et ne lâchez pas un pouce de terrain ! Une base."
+      },
+      "de": {
+        "original": "Isolated islands form a formidable defence. Hold strong and counter hard across no-man's land. One Base.",
+        "translation": "Einsame Inseln bilden eine ausgezeichnete Verteidigung in diesem Niemandsland. Bleibt stark und kontert hart! Eine Basis."
+      },
+      "ru": {
+        "original": "Isolated islands form a formidable defence. Hold strong and counter hard across no-man's land. One Base.",
+        "translation": "Чем неприступнее острова, тем проще обороняться. Жестко встреть врага, а затем смело иди в контратаку. Одна база."
+      },
+      "pt": {
+        "original": "Isolated islands form a formidable defence. Hold strong and counter hard across no-man's land. One Base.",
+        "translation": "Ilhas isoladas formam uma defesa formidável. Defenda-se e parta para o contra-ataque nesta terra de ninguém. Uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-skull-block-thumb",
+  "large_image": "Gui/Maps/arena-skull-block-full"
+}

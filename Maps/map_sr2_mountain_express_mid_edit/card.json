@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_mountain_express_mid_edit",
+  "scope": "public",
+  "name": {
+    "text": "Mountain Express Mid Edit",
+    "data": {
+      "ru": {
+        "original": "Mountain Express ",
+        "translation": "Mountain Express"
+      },
+      "es": {
+        "original": "Mountain Express ",
+        "translation": "Mountain Express"
+      },
+      "de": {
+        "original": "Mountain Express ",
+        "translation": "Mountain Express"
+      },
+      "pt": {
+        "original": "Mountain Express ",
+        "translation": "Mountain Express"
+      },
+      "fr": {
+        "original": "Mountain Express ",
+        "translation": "Mountain Express"
+      }
+    }
+  },
+  "description": {
+    "text": "Expedition grade. Two Cubes and a Base across varied terrain.",
+    "data": {
+      "ru": {
+        "original": "Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "Настоящая экспедиция. Два куба и база на территории с разнообразным рельефом."
+      },
+      "es": {
+        "original": "Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "Un terreno variado para exploradores entusiastas.\nDos generadores y un núcleo."
+      },
+      "de": {
+        "original": "Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "Geht auf Entdeckungsreise! Zwei Generatoren und eine Basis in unterschiedlichen Terrains."
+      },
+      "pt": {
+        "original": "Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "Uma verdadeira expedição. Dois Cubos e uma Base em terrenos variados."
+      },
+      "fr": {
+        "original": "Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "Une arène qui relève de l'expédition. Deux cubes et une base avec des terrains variés."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-mountain-express-thumb2",
+  "large_image": "Gui/Maps/arena-mountain-express-thumb2"
+}

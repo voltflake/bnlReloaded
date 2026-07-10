@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_blockageddon",
+  "scope": "public",
+  "name": {
+    "text": "Blockageddon",
+    "data": {
+      "ru": {
+        "original": "Blockageddon",
+        "translation": "Blockageddon"
+      },
+      "es": {
+        "original": "Blockageddon",
+        "translation": "Blockageddon"
+      },
+      "de": {
+        "original": "Blockageddon",
+        "translation": "Blockageddon"
+      },
+      "fr": {
+        "original": "Blockageddon",
+        "translation": "Blockageddon"
+      },
+      "pt": {
+        "original": "Blockageddon",
+        "translation": "Blockageddon"
+      }
+    }
+  },
+  "description": {
+    "text": "Five Heroes of the ablockalypse now fight in this arena. One Cube and a Base.",
+    "data": {
+      "ru": {
+        "original": "Five Heroes of the ablockalypse now fight in this arena. One Cube and a Base.",
+        "translation": "Пять Героев Апокалипсиса теперь сражаются на этой арене. Один Куб и База."
+      },
+      "es": {
+        "original": "Five Heroes of the ablockalypse now fight in this arena. One Cube and a Base.",
+        "translation": "Enfrenta a los héroes del ablocalipsis.\nUn generador y un núcleo."
+      },
+      "de": {
+        "original": "Five Heroes of the ablockalypse now fight in this arena. One Cube and a Base.",
+        "translation": "Ab jetzt kämpfen die fünf Helden der Ablockalypse in dieser Arena. Ein Generator und eine Basis."
+      },
+      "fr": {
+        "original": "Five Heroes of the ablockalypse now fight in this arena. One Cube and a Base.",
+        "translation": "Le terrain idéal pour une lutte entre les cinq héros de l'ablocalypse. Un cube et une base."
+      },
+      "pt": {
+        "original": "Five Heroes of the ablockalypse now fight in this arena. One Cube and a Base.",
+        "translation": "Cinco Heróis do Ablocalipse agora lutam nesta arena. Um Cubo e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-blockgeddon-thumb",
+  "large_image": "Gui/Maps/arena-blockgeddon-full"
+}

@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_tutorial_fox_2",
+  "scope": "public",
+  "name": {
+    "text": "Practice Grounds",
+    "data": {
+      "de": {
+        "original": "Practice Grounds",
+        "translation": "Übungsgelände"
+      },
+      "es": {
+        "original": "Practice Grounds",
+        "translation": "Tutorial"
+      },
+      "pt": {
+        "original": "Practice Grounds",
+        "translation": "Área de Treinamento"
+      },
+      "fr": {
+        "original": "Practice Grounds",
+        "translation": "Terrain d'entraînement"
+      },
+      "ru": {
+        "original": "Practice Grounds",
+        "translation": "Учебная площадка"
+      }
+    }
+  },
+  "description": {
+    "text": "Practice Map",
+    "data": {
+      "de": {
+        "original": "Practice Map",
+        "translation": "Übungskarte"
+      },
+      "es": {
+        "original": "Practice Map",
+        "translation": "Tutorial"
+      },
+      "pt": {
+        "original": "Practice Map",
+        "translation": "Mapa de Treinamento"
+      },
+      "fr": {
+        "original": "Practice Map",
+        "translation": "Carte du terrain d'entraînement"
+      },
+      "ru": {
+        "original": "Practice Map",
+        "translation": "Карта для обучения"
+      }
+    }
+  },
+  "image": "Gui/Maps/map_cube_cove",
+  "large_image": "Gui/Maps/map_cube_cove"
+}

@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_cruise_boat",
+  "scope": "public",
+  "name": {
+    "text": "Cruise Boat",
+    "data": {
+      "es": {
+        "original": "Cruise Boat",
+        "translation": "Cruise Boat"
+      },
+      "pt": {
+        "original": "Cruise Boat",
+        "translation": "Cruise Boat"
+      },
+      "de": {
+        "original": "Cruise Boat",
+        "translation": "Cruise Boat"
+      },
+      "ru": {
+        "original": "Cruise Boat",
+        "translation": "Cruise Boat"
+      },
+      "fr": {
+        "original": "Cruise Boat",
+        "translation": "Cruise Boat"
+      }
+    }
+  },
+  "description": {
+    "text": "Find out what chaos unfolds when two groups of Heroes board the same ship. Created by sanojLeOne. Two Cubes and a Base.",
+    "data": {
+      "es": {
+        "original": "Find out what chaos unfolds when two groups of Heroes board the same ship. Created by sanojLeOne. Two Cubes and a Base.",
+        "translation": "Dos grupos rivales a bordo del mismo barco significa caos. Autor: sanojLeOne.\nDos generadores y un núcleo."
+      },
+      "pt": {
+        "original": "Find out what chaos unfolds when two groups of Heroes board the same ship. Created by sanojLeOne. Two Cubes and a Base.",
+        "translation": "Descubra a confusão que acontece quando dois grupos de heróis entram no mesmo navio. Criado por sanojLeOne. Dois Cubos e uma Base."
+      },
+      "de": {
+        "original": "Find out what chaos unfolds when two groups of Heroes board the same ship. Created by sanojLeOne. Two Cubes and a Base.",
+        "translation": "Was für ein Chaos gibt es wohl, wenn zwei Teams dasselbe Schiff einnehmen? Von sanojLeOne. Zwei Generatoren und eine Basis."
+      },
+      "ru": {
+        "original": "Find out what chaos unfolds when two groups of Heroes board the same ship. Created by sanojLeOne. Two Cubes and a Base.",
+        "translation": "Узнай, какой начнется хаос, когда две группы героев окажутся на одном корабле. Создано sanojLeOne. Два куба и база."
+      },
+      "fr": {
+        "original": "Find out what chaos unfolds when two groups of Heroes board the same ship. Created by sanojLeOne. Two Cubes and a Base.",
+        "translation": "Quand deux groupes de héros embarquent à bord du même paquebot, vous pouvez être sur que la croisière va s'amuser... Créée par sanojLeOne. Deux cubes et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-cruise-boat-thumb",
+  "large_image": "Gui/Maps/arena-cruise-boat-full"
+}

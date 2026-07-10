@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_the_last_bastion",
+  "scope": "public",
+  "name": {
+    "text": "Last Bastion",
+    "data": {
+      "ru": {
+        "original": "Last Bastion",
+        "translation": "Last Bastion"
+      },
+      "es": {
+        "original": "Last Bastion",
+        "translation": "Last Bastion"
+      },
+      "de": {
+        "original": "Last Bastion",
+        "translation": "Last Bastion"
+      },
+      "pt": {
+        "original": "Last Bastion",
+        "translation": "Last Bastion"
+      },
+      "fr": {
+        "original": "Last Bastion",
+        "translation": "Last Bastion"
+      }
+    }
+  },
+  "description": {
+    "text": "Never give up, never run away and desert the Last Bastion! Two Cubes and a Base.",
+    "data": {
+      "ru": {
+        "original": "Never give up, never run away and desert the Last Bastion! Two Cubes and a Base.",
+        "translation": "Никогда не сдавайся и не убегай, ведь это последний бастион! Два куба и база."
+      },
+      "es": {
+        "original": "Never give up, never run away and desert the Last Bastion! Two Cubes and a Base.",
+        "translation": "¡Defiende el último bastión!\nDos generadores y un núcleo."
+      },
+      "de": {
+        "original": "Never give up, never run away and desert the Last Bastion! Two Cubes and a Base.",
+        "translation": "Gebt niemals auf! Bei dieser letzten Bastion wird nicht desertiert! Zwei Generatoren und eine Basis."
+      },
+      "pt": {
+        "original": "Never give up, never run away and desert the Last Bastion! Two Cubes and a Base.",
+        "translation": "O último dos bastiões! Dois Cubos e uma Base."
+      },
+      "fr": {
+        "original": "Never give up, never run away and desert the Last Bastion! Two Cubes and a Base.",
+        "translation": "N'abandonnez jamais ! Interdiction de fuir et de déserter ce bastion ! Deux cubes et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-last-bastion-thumb",
+  "large_image": "Gui/Maps/arena-last-bastion-full"
+}

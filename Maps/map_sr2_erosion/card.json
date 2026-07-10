@@ -1,0 +1,15 @@
+{
+  "category": "map",
+  "_id": "map_sr2_erosion",
+  "scope": "public",
+  "name": {
+    "text": "Erosion",
+    "data": {}
+  },
+  "description": {
+    "text": "Lava flowing beneath broken bridges. Mud, stones and dangerous traps stand between the two teams. One base.",
+    "data": {}
+  },
+  "image": "Gui/Maps/map_sr2_erosion",
+  "large_image": "Gui/Maps/map_sr2_erosion"
+}

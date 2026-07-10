@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_lake_house",
+  "scope": "public",
+  "name": {
+    "text": "Lake House",
+    "data": {
+      "es": {
+        "original": "Lake House",
+        "translation": "Lake House"
+      },
+      "fr": {
+        "original": "Lake House",
+        "translation": "Lake House"
+      },
+      "de": {
+        "original": "Lake House",
+        "translation": "Lake House"
+      },
+      "pt": {
+        "original": "Lake House",
+        "translation": "Lake House"
+      },
+      "ru": {
+        "original": "Lake House",
+        "translation": "Lake House"
+      }
+    }
+  },
+  "description": {
+    "text": "Close quarters combat inside of the house. One Cube and a Base.",
+    "data": {
+      "es": {
+        "original": "Close quarters combat inside of the house. One Cube and a Base.",
+        "translation": "Combate en un espacio reducido.\nUn generador y un núcleo."
+      },
+      "fr": {
+        "original": "Close quarters combat inside of the house. One Cube and a Base.",
+        "translation": "Un combat au corps à corps entre les murs. Deux cubes et une base."
+      },
+      "de": {
+        "original": "Close quarters combat inside of the house. One Cube and a Base.",
+        "translation": "Nahkampf im Hausinneren. Ein Generator und eine Basis."
+      },
+      "ru": {
+        "original": "Close quarters combat inside of the house. One Cube and a Base.",
+        "translation": "Ближний бой внутри дома. Один куб и база."
+      },
+      "pt": {
+        "original": "Close quarters combat inside of the house. One Cube and a Base.",
+        "translation": "Combate à queima-roupa dentro de uma casa. Um Cubo e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-lake-house-thumb",
+  "large_image": "Gui/Maps/arena-lake-house-full"
+}

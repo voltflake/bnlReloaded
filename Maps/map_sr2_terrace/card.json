@@ -1,0 +1,15 @@
+{
+  "category": "map",
+  "_id": "map_sr2_terrace",
+  "scope": "public",
+  "name": {
+    "text": "Terrace",
+    "data": {}
+  },
+  "description": {
+    "text": "Multi-level pier pathways set between two towers. One base.",
+    "data": {}
+  },
+  "image": "Gui/Maps/map_sr2_terrace",
+  "large_image": "Gui/Maps/map_sr2_terrace"
+}

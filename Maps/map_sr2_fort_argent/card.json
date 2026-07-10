@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_fort_argent",
+  "scope": "public",
+  "name": {
+    "text": "Fort Argent",
+    "data": {
+      "es": {
+        "original": "Fort Argent",
+        "translation": "Fort Argent"
+      },
+      "fr": {
+        "original": "Fort Argent",
+        "translation": "Fort Argent"
+      },
+      "de": {
+        "original": "Fort Argent",
+        "translation": "Fort Argent"
+      },
+      "pt": {
+        "original": "Fort Argent",
+        "translation": "Fort Argent"
+      },
+      "ru": {
+        "original": "Fort Argent",
+        "translation": "Fort Argent"
+      }
+    }
+  },
+  "description": {
+    "text": "Groups of Heroes battling through this slowly crumbling fortress could end up accelerating its destruction. A One Cube and a Base.",
+    "data": {
+      "es": {
+        "original": "Groups of Heroes battling through this slowly crumbling fortress could end up accelerating its destruction. A One Cube and a Base.",
+        "translation": "Una fortaleza que se cae a pedazos con cada nueva escaramuza.\nUn generador y un núcleo."
+      },
+      "fr": {
+        "original": "Groups of Heroes battling through this slowly crumbling fortress could end up accelerating its destruction. A One Cube and a Base.",
+        "translation": "L'affrontement entre les deux équipes ennemies dans cette forteresse décrépite pourrait bien accélérer son effondrement. Un cube et une base."
+      },
+      "de": {
+        "original": "Groups of Heroes battling through this slowly crumbling fortress could end up accelerating its destruction. A One Cube and a Base.",
+        "translation": "Die vielen Helden, die sich durch diese Festung kämpfen, könnten ihren Einsturz noch beschleunigen. Ein Generator und eine Basis."
+      },
+      "ru": {
+        "original": "Groups of Heroes battling through this slowly crumbling fortress could end up accelerating its destruction. A One Cube and a Base.",
+        "translation": "Группы героев, сражающиеся в этой медленно разваливающейся крепости, вполне могут ускорить ее разрушение. Один куб и база."
+      },
+      "pt": {
+        "original": "Groups of Heroes battling through this slowly crumbling fortress could end up accelerating its destruction. A One Cube and a Base.",
+        "translation": "Grupos de heróis que batalham nesta fortaleza em desmoronamento podem acabar acelerando sua destruição. Um Cubo e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-fort-argent-thumb",
+  "large_image": "Gui/Maps/arena-fort-argent-full"
+}

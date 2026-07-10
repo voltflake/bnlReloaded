@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_parapet",
+  "scope": "public",
+  "name": {
+    "text": "Parapet",
+    "data": {
+      "ru": {
+        "original": "Parapet",
+        "translation": "Parapet"
+      },
+      "es": {
+        "original": "Parapet",
+        "translation": "Parapet"
+      },
+      "de": {
+        "original": "Parapet",
+        "translation": "Parapet"
+      },
+      "pt": {
+        "original": "Parapet",
+        "translation": "Parapet"
+      },
+      "fr": {
+        "original": "Parapet",
+        "translation": "Parapet"
+      }
+    }
+  },
+  "description": {
+    "text": "It’s open season and you’re the prey. Controlling the battlefield will need true blockhead teamwork. One Base.",
+    "data": {
+      "ru": {
+        "original": "It’s open season and you’re the prey. Controlling the battlefield will need true blockhead teamwork. One Base.",
+        "translation": "Сезон охоты открыт, и в этот раз жертва — ты. Если хочешь доминировать на поле боя, придется думать своей дубовой башкой. Одна база."
+      },
+      "es": {
+        "original": "It’s open season and you’re the prey. Controlling the battlefield will need true blockhead teamwork. One Base.",
+        "translation": "Es temporada de caza y tú eres la presa.\nUn núcleo."
+      },
+      "de": {
+        "original": "It’s open season and you’re the prey. Controlling the battlefield will need true blockhead teamwork. One Base.",
+        "translation": "Die Jagd ist eröffnet und ihr seid die Beute! Um das Schlachtfeld zu kontrollieren, ist Teamwork angesagt. Eine Basis."
+      },
+      "pt": {
+        "original": "It’s open season and you’re the prey. Controlling the battlefield will need true blockhead teamwork. One Base.",
+        "translation": "Chegou a temporada de caça, e você é a presa. Controlar o campo de batalha exigirá grande colaboração. Uma Base."
+      },
+      "fr": {
+        "original": "It’s open season and you’re the prey. Controlling the battlefield will need true blockhead teamwork. One Base.",
+        "translation": "La chasse est ouverte, et vous en êtes la proie ! Contrôler le champ de bataille demandera un intense travail d'équipe. Une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-parapet-thumb",
+  "large_image": "Gui/Maps/arena-parapet-full"
+}

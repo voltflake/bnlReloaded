@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_shuko_style",
+  "scope": "public",
+  "name": {
+    "text": "Shuko Style",
+    "data": {
+      "ru": {
+        "original": "Shuko Style",
+        "translation": "Shuko Style"
+      },
+      "es": {
+        "original": "Shuko Style",
+        "translation": "Shuko Style"
+      },
+      "de": {
+        "original": "Shuko Style",
+        "translation": "Shuko Style"
+      },
+      "pt": {
+        "original": "Shuko Style",
+        "translation": "Shuko Style"
+      },
+      "fr": {
+        "original": "Shuko Style",
+        "translation": "Shuko Style"
+      }
+    }
+  },
+  "description": {
+    "text": "Defend your honor and Cubes in this arena.  Two Cubes and a Base. ",
+    "data": {
+      "ru": {
+        "original": "Defend your honor and Cubes in this arena.  Two Cubes and a Base. ",
+        "translation": "Защищай свою честь и кубы. Два куба и база."
+      },
+      "es": {
+        "original": "Defend your honor and Cubes in this arena.  Two Cubes and a Base. ",
+        "translation": "Defiende tu honor en este mapa de estilo oriental.\nDos generadores y un núcleo."
+      },
+      "de": {
+        "original": "Defend your honor and Cubes in this arena.  Two Cubes and a Base. ",
+        "translation": "Verteidigt eure Ehre (und Generatoren) in dieser Arena. Zwei Generatoren und eine Basis."
+      },
+      "pt": {
+        "original": "Defend your honor and Cubes in this arena.  Two Cubes and a Base. ",
+        "translation": "Defenda sua honra e seus Cubos nesta arena. Dois Cubos e uma Base."
+      },
+      "fr": {
+        "original": "Defend your honor and Cubes in this arena.  Two Cubes and a Base. ",
+        "translation": "Défendez votre honneur et vos cubes dans cette arène. Deux cubes et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-shuko-style-water-thumb",
+  "large_image": "Gui/Maps/arena-shuko-style-water-full"
+}

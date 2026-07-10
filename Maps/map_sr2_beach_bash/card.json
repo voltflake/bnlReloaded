@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_beach_bash",
+  "scope": "public",
+  "name": {
+    "text": "Beach Bash",
+    "data": {
+      "es": {
+        "original": "Beach Bash",
+        "translation": "Beach Bash"
+      },
+      "ru": {
+        "original": "Beach Bash",
+        "translation": "Beach Bash"
+      },
+      "de": {
+        "original": "Beach Bash",
+        "translation": "Beach Bash"
+      },
+      "fr": {
+        "original": "Beach Bash",
+        "translation": "Beach Bash"
+      },
+      "pt": {
+        "original": "Beach Bash",
+        "translation": "Beach Bash"
+      }
+    }
+  },
+  "description": {
+    "text": "This island should be a place to party and relax, instead our Heroes brought rockets. Created by Alpha. Two Cubes and a Base.",
+    "data": {
+      "es": {
+        "original": "This island should be a place to party and relax, instead our Heroes brought rockets. Created by Alpha. Two Cubes and a Base.",
+        "translation": "Debería ser un lugar para relajarse... pero con cohetes y explosiones. Autor: Alpha.\nDos generadores y un núcleo."
+      },
+      "pt": {
+        "original": "This island should be a place to party and relax, instead our Heroes brought rockets. Created by Alpha. Two Cubes and a Base.",
+        "translation": "Esta ilha deve ser um lugar de festa e relaxamento, mas em vez disso os nossos heróis trouxeram foguetes. Criado por Alpha. Dois Cubos e uma Base."
+      },
+      "de": {
+        "original": "This island should be a place to party and relax, instead our Heroes brought rockets. Created by Alpha. Two Cubes and a Base.",
+        "translation": "Anstatt Ferien zu machen packen unsere Helden auf dieser Insel lieber die Wummen aus. Von Alpha. Zwei Generatoren und eine Basis."
+      },
+      "ru": {
+        "original": "This island should be a place to party and relax, instead our Heroes brought rockets. Created by Alpha. Two Cubes and a Base.",
+        "translation": "Этот остров должен быть местом для отдыха и вечеринок, но наши герои притащили ракеты. Создано Alpha. Два куба и база."
+      },
+      "fr": {
+        "original": "This island should be a place to party and relax, instead our Heroes brought rockets. Created by Alpha. Two Cubes and a Base.",
+        "translation": "Cette île aurait pu être un coin de paradis, mais nos héros ont décidé d'y poser leurs lance-roquettes. Créée par Alpha. Deux cubes et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-beach-bash-thumb",
+  "large_image": "Gui/Maps/arena-beach-bash-full"
+}

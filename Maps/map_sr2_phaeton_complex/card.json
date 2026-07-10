@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_phaeton_complex",
+  "scope": "public",
+  "name": {
+    "text": "Phaeton Complex",
+    "data": {
+      "es": {
+        "original": "Phaeton Complex",
+        "translation": "Phaeton Complex"
+      },
+      "fr": {
+        "original": "Phaeton Complex",
+        "translation": "Phaeton Complex"
+      },
+      "de": {
+        "original": "Phaeton Complex",
+        "translation": "Phaeton Complex"
+      },
+      "pt": {
+        "original": "Phaeton Complex",
+        "translation": "Phaeton Complex"
+      },
+      "ru": {
+        "original": "Phaeton Complex",
+        "translation": "Phaeton Complex"
+      }
+    }
+  },
+  "description": {
+    "text": "What's being worked on in this secret complex is anyone's guess. However, the strike teams raiding it seem to think there's something of value inside. Two Cubes and a Base.",
+    "data": {
+      "es": {
+        "original": "What's being worked on in this secret complex is anyone's guess. However, the strike teams raiding it seem to think there's something of value inside. Two Cubes and a Base.",
+        "translation": "Muy pocos conocen las investigaciones secretas que se esconden en este complejo.\nDos generadores y un núcleo."
+      },
+      "fr": {
+        "original": "What's being worked on in this secret complex is anyone's guess. However, the strike teams raiding it seem to think there's something of value inside. Two Cubes and a Base.",
+        "translation": "Nul ne sait ce qui se trame dans ce complexe secret, mais les équipes qui s'y affrontent semblent penser qu'il cache quelque chose de valeur. Deux cubes et une base."
+      },
+      "de": {
+        "original": "What's being worked on in this secret complex is anyone's guess. However, the strike teams raiding it seem to think there's something of value inside. Two Cubes and a Base.",
+        "translation": "Woran in dieser Geheimanlage gearbeitet wird, weiß keiner so genau, aber es wird gemunkelt, dass etwas Wertvolles in ihr verborgen liegt. Zwei Generatoren und eine Basis."
+      },
+      "ru": {
+        "original": "What's being worked on in this secret complex is anyone's guess. However, the strike teams raiding it seem to think there's something of value inside. Two Cubes and a Base.",
+        "translation": "Над чем работают в этом секретном комплексе, остается только догадываться. Однако ударные группы, совершающие рейд на него, похоже, считают, что там есть что-то ценное. Два куба и база."
+      },
+      "pt": {
+        "original": "What's being worked on in this secret complex is anyone's guess. However, the strike teams raiding it seem to think there's something of value inside. Two Cubes and a Base.",
+        "translation": "O propósito destas instalações secretas é secreto. Porém, as equipes que as invadem parecem acreditar que há algo de valor lá dentro. Dois Cubos e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-phaeton-complex-thumb",
+  "large_image": "Gui/Maps/arena-phaeton-complex-full"
+}

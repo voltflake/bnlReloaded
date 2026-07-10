@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_duck_and_cover",
+  "scope": "public",
+  "name": {
+    "text": "Duck and Cover",
+    "data": {
+      "fr": {
+        "original": "Duck and Cover",
+        "translation": "Duck and Cover"
+      },
+      "ru": {
+        "original": "Duck and Cover",
+        "translation": "Duck and Cover"
+      },
+      "es": {
+        "original": "Duck and Cover",
+        "translation": "Duck and Cover"
+      },
+      "pt": {
+        "original": "Duck and Cover",
+        "translation": "Duck and Cover"
+      },
+      "de": {
+        "original": "Duck and Cover",
+        "translation": "Duck and Cover"
+      }
+    }
+  },
+  "description": {
+    "text": "Take cover whilst working over the high ground or duck down and attack from below. One Base.",
+    "data": {
+      "de": {
+        "original": "Take cover whilst working over the high ground or duck down and attack from below. One Base.",
+        "translation": "Geht in Deckung, während ihr durch hohe Gebiete prescht, oder greift von unten an. Eine Basis."
+      },
+      "es": {
+        "original": "Take cover whilst working over the high ground or duck down and attack from below. One Base.",
+        "translation": "Ataca desde lo alto o desde abajo sin dejar de cubrirte.\nUn núcleo."
+      },
+      "pt": {
+        "original": "Take cover whilst working over the high ground or duck down and attack from below. One Base.",
+        "translation": "Proteja-se lá em cima ou agache-se e ataque lá de baixo. Uma Base."
+      },
+      "fr": {
+        "original": "Take cover whilst working over the high ground or duck down and attack from below. One Base.",
+        "translation": "Escaladez les hauteurs pour vous couvrir ou rampez pour attaquer par-dessous. Une base."
+      },
+      "ru": {
+        "original": "Take cover whilst working over the high ground or duck down and attack from below. One Base.",
+        "translation": "Найди укрытие и атакуй с возвышенности, или пригнись и бей снизу. Одна база."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-duck-and-cover-thumb",
+  "large_image": "Gui/Maps/arena-duck-and-cover-full"
+}

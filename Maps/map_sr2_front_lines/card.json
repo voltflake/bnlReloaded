@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_front_lines",
+  "scope": "public",
+  "name": {
+    "text": "Front Lines",
+    "data": {
+      "ru": {
+        "original": "Front Lines",
+        "translation": "Front Lines"
+      },
+      "es": {
+        "original": "Front Lines",
+        "translation": "Front Lines"
+      },
+      "de": {
+        "original": "Front Lines",
+        "translation": "Front Lines"
+      },
+      "pt": {
+        "original": "Front Lines",
+        "translation": "Front Lines"
+      },
+      "fr": {
+        "original": "Front Lines",
+        "translation": "Front Lines"
+      }
+    }
+  },
+  "description": {
+    "text": "Fight over, under, and through trenches to reach the opposing forces. One Cube and a Base.",
+    "data": {
+      "ru": {
+        "original": "Fight over, under, and through trenches to reach the opposing forces. One Cube and a Base.",
+        "translation": "Сражайся в, над, под и через окопы, чтобы прорваться к вражеским силам. Один куб, одна база."
+      },
+      "es": {
+        "original": "Fight over, under, and through trenches to reach the opposing forces. One Cube and a Base.",
+        "translation": "Atraviesa las trincheras para atacar a los enemigos.\nUn generador y un núcleo."
+      },
+      "de": {
+        "original": "Fight over, under, and through trenches to reach the opposing forces. One Cube and a Base.",
+        "translation": "Kämpft über, unter und in den Schützengräben, um eure Gegner zu erreichen. Ein Generator und eine Basis."
+      },
+      "pt": {
+        "original": "Fight over, under, and through trenches to reach the opposing forces. One Cube and a Base.",
+        "translation": "Lute em cima, embaixo e pelas trincheiras para alcançar os oponentes. Um Cubo e uma Base."
+      },
+      "fr": {
+        "original": "Fight over, under, and through trenches to reach the opposing forces. One Cube and a Base.",
+        "translation": "Affrontez les forces ennemies à tous les niveaux. Un cube et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-front-lines-thumb",
+  "large_image": "Gui/Maps/arena-front-lines-full"
+}

@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_beach_base",
+  "scope": "public",
+  "name": {
+    "text": "Beach Base",
+    "data": {
+      "ru": {
+        "original": "Beach Base",
+        "translation": "Beach Base"
+      },
+      "es": {
+        "original": "Beach Base",
+        "translation": "Beach Base"
+      },
+      "de": {
+        "original": "Beach Base",
+        "translation": "Beach Base"
+      },
+      "pt": {
+        "original": "Beach Base",
+        "translation": "Beach Base"
+      },
+      "fr": {
+        "original": "Beach Base",
+        "translation": "Beach Base"
+      }
+    }
+  },
+  "description": {
+    "text": "Swim, jump, dig, and build your way to victory.  Two Cubes and a Base.",
+    "data": {
+      "ru": {
+        "original": "Swim, jump, dig, and build your way to victory.  Two Cubes and a Base.",
+        "translation": "Прыгай, ныряй, строй, побеждай. Два куба и база."
+      },
+      "es": {
+        "original": "Swim, jump, dig, and build your way to victory.  Two Cubes and a Base.",
+        "translation": "Cava más, salta más, construye más y... nada más.\nDos generadores y un núcleo."
+      },
+      "de": {
+        "original": "Swim, jump, dig, and build your way to victory.  Two Cubes and a Base.",
+        "translation": "Schwimmt, springt, baut und buddelt euch zum Sieg. Zwei Generatoren und eine Basis."
+      },
+      "pt": {
+        "original": "Swim, jump, dig, and build your way to victory.  Two Cubes and a Base.",
+        "translation": "Nade, pule, cave e construa para sair vitorioso. Dois Cubos e uma Base."
+      },
+      "fr": {
+        "original": "Swim, jump, dig, and build your way to victory.  Two Cubes and a Base.",
+        "translation": "Tous à l’eau pour rafler la victoire ! Deux cubes et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-beach-base-thumb",
+  "large_image": "Gui/Maps/arena-beach-base-full"
+}

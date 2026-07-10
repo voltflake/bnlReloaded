@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_block",
+  "scope": "public",
+  "name": {
+    "text": "Block",
+    "data": {
+      "es": {
+        "original": "Block",
+        "translation": "Block"
+      },
+      "fr": {
+        "original": "Block",
+        "translation": "Bloc"
+      },
+      "de": {
+        "original": "Block",
+        "translation": "Block"
+      },
+      "pt": {
+        "original": "Block",
+        "translation": "Bloco"
+      },
+      "ru": {
+        "original": "Block",
+        "translation": "Block"
+      }
+    }
+  },
+  "description": {
+    "text": "Battle your way through these brightly coloured block formations on route to take down your opposition. One Base.",
+    "data": {
+      "es": {
+        "original": "Battle your way through these brightly coloured block formations on route to take down your opposition. One Base.",
+        "translation": "Un escenario lleno de bloques muy coloridos.\nUn núcleo."
+      },
+      "fr": {
+        "original": "Battle your way through these brightly coloured block formations on route to take down your opposition. One Base.",
+        "translation": "Frayez-vous un chemin parmi les blocs flashy pour vaincre vos ennemis ! Une base."
+      },
+      "de": {
+        "original": "Battle your way through these brightly coloured block formations on route to take down your opposition. One Base.",
+        "translation": "Kämpft euch durch farbenfrohe Blockformationen und vernichtet eure Gegner! Eine Basis."
+      },
+      "ru": {
+        "original": "Battle your way through these brightly coloured block formations on route to take down your opposition. One Base.",
+        "translation": "Разбивай эти цветные блоки и прокладывай путь к вражеской базе. Затем просто уничтожь врага. Одна база."
+      },
+      "pt": {
+        "original": "Battle your way through these brightly coloured block formations on route to take down your opposition. One Base.",
+        "translation": "Atravesse essas formações de blocos coloridos para derrotar os adversários. Uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-block-thumb",
+  "large_image": "Gui/Maps/arena-block-full"
+}

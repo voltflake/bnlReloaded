@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_processing_plant",
+  "scope": "public",
+  "name": {
+    "text": "Processing Plant",
+    "data": {
+      "es": {
+        "original": "Processing Plant",
+        "translation": "Processing Plant"
+      },
+      "fr": {
+        "original": "Processing Plant",
+        "translation": "Processing Plant"
+      },
+      "de": {
+        "original": "Processing Plant",
+        "translation": "Processing Plant"
+      },
+      "pt": {
+        "original": "Processing Plant",
+        "translation": "Processing Plant"
+      },
+      "ru": {
+        "original": "Processing Plant",
+        "translation": "Processing Plant"
+      }
+    }
+  },
+  "description": {
+    "text": "With a number of routes over, around, and through the arena there's a way to attack or defend for every Hero. Two Cubes and a Base.",
+    "data": {
+      "es": {
+        "original": "With a number of routes over, around, and through the arena there's a way to attack or defend for every Hero. Two Cubes and a Base.",
+        "translation": "Varios caminos que cruzan el mapa de punta a punta.\nDos generadores y un núcleo."
+      },
+      "fr": {
+        "original": "With a number of routes over, around, and through the arena there's a way to attack or defend for every Hero. Two Cubes and a Base.",
+        "translation": "Avec sa multitude de voies d'accès, cette arène fera le bonheur de tous les héros. Deux cubes et une base."
+      },
+      "de": {
+        "original": "With a number of routes over, around, and through the arena there's a way to attack or defend for every Hero. Two Cubes and a Base.",
+        "translation": "Bei so vielen Wegen über, um und durch die Arena gibt es für jeden Helden perfekte Offensiv- und Defensivstrategien. Zwei Generator und eine Basis."
+      },
+      "ru": {
+        "original": "With a number of routes over, around, and through the arena there's a way to attack or defend for every Hero. Two Cubes and a Base.",
+        "translation": "На этой арене есть масса подземных, надземных и обходных ходов, поэтому атаковать и защищаться здесь сможет любой герой. Два куба и база."
+      },
+      "pt": {
+        "original": "With a number of routes over, around, and through the arena there's a way to attack or defend for every Hero. Two Cubes and a Base.",
+        "translation": "Com inúmeros caminhos por cima, ao redor e através da arena, há uma forma de atacar ou defender para todos os heróis. Dois Cubos e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-processing-plant-thumb",
+  "large_image": "Gui/Maps/arena-processing-plant-full"
+}

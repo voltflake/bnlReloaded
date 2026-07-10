@@ -1,0 +1,57 @@
+{
+  "_id": "map_testing",
+  "category": "map",
+  "description": {
+    "data": {
+      "de": {
+        "original": "Map for testing purposes and PvP evaluations.",
+        "translation": "Map for testing purposes and PvP evaluations."
+      },
+      "es": {
+        "original": "Map for testing purposes and PvP evaluations.",
+        "translation": "Map for testing purposes and PvP evaluations."
+      },
+      "fr": {
+        "original": "Map for testing purposes and PvP evaluations.",
+        "translation": "Map for testing purposes and PvP evaluations."
+      },
+      "pt": {
+        "original": "Map for testing purposes and PvP evaluations.",
+        "translation": "Map for testing purposes and PvP evaluations."
+      },
+      "ru": {
+        "original": "Map for testing purposes and PvP evaluations.",
+        "translation": "Map for testing purposes and PvP evaluations."
+      }
+    },
+    "text": "Map for testing purposes and PvP evaluations."
+  },
+  "image": "https://i.gyazo.com/9d75d506f1992ff0c9de04895fda13e8.png",
+  "large_image": "https://i.gyazo.com/306b0275f912a344c0d99633b8d31306.png",
+  "name": {
+    "data": {
+      "de": {
+        "original": "PVP/Testing",
+        "translation": "PVP/Testing"
+      },
+      "es": {
+        "original": "PVP/Testing",
+        "translation": "PVP/Testing"
+      },
+      "fr": {
+        "original": "PVP/Testing",
+        "translation": "PVP/Testing"
+      },
+      "pt": {
+        "original": "PVP/Testing",
+        "translation": "PVP/Testing"
+      },
+      "ru": {
+        "original": "PVP/Testing",
+        "translation": "PVP/Testing"
+      }
+    },
+    "text": "PVP/Testing"
+  },
+  "scope": "public"
+}

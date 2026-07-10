@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_build_101",
+  "scope": "public",
+  "name": {
+    "text": "Build 101",
+    "data": {
+      "es": {
+        "original": "Build 101",
+        "translation": "Build 101"
+      },
+      "fr": {
+        "original": "Build 101",
+        "translation": "Build 101"
+      },
+      "de": {
+        "original": "Build 101",
+        "translation": "Build 101"
+      },
+      "pt": {
+        "original": "Build 101",
+        "translation": "Build 101"
+      },
+      "ru": {
+        "original": "Build 101",
+        "translation": "Build 101"
+      }
+    }
+  },
+  "description": {
+    "text": "Bring your best blocks and finish the job! This arena establishes base building 101. One Base.",
+    "data": {
+      "es": {
+        "original": "Bring your best blocks and finish the job! This arena establishes base building 101. One Base.",
+        "translation": "Usa este escenario para aprender a construir.\nUn núcleo."
+      },
+      "fr": {
+        "original": "Bring your best blocks and finish the job! This arena establishes base building 101. One Base.",
+        "translation": "Ramenez vos meilleurs blocs et finissez le travail ! Une arène parfaite pour découvrir les bases de la construction. Une base."
+      },
+      "de": {
+        "original": "Bring your best blocks and finish the job! This arena establishes base building 101. One Base.",
+        "translation": "Bringt eure besten Blöcke mit! In dieser Arena kriegt ihr einen Grundkurs im Bauen. Eine Basis."
+      },
+      "ru": {
+        "original": "Bring your best blocks and finish the job! This arena establishes base building 101. One Base.",
+        "translation": "Бери свои лучшие блоки и заканчивай начатое. На этой арене ты пройдешь курс молодого строителя. Одна база."
+      },
+      "pt": {
+        "original": "Bring your best blocks and finish the job! This arena establishes base building 101. One Base.",
+        "translation": "Traga seus melhores blocos de teste e termine o trabalho! Esta arena apresenta os fundamentos da construção de bases. Uma base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-build-101-thumb",
+  "large_image": "Gui/Maps/arena-build-101-full"
+}

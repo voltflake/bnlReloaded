@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_gate_house",
+  "scope": "public",
+  "name": {
+    "text": "Gate House",
+    "data": {
+      "es": {
+        "original": "Gate House",
+        "translation": "Gate House"
+      },
+      "fr": {
+        "original": "Gate House",
+        "translation": "Gate House"
+      },
+      "de": {
+        "original": "Gate House",
+        "translation": "Gate House"
+      },
+      "pt": {
+        "original": "Gate House",
+        "translation": "Gate House"
+      },
+      "ru": {
+        "original": "Gate House",
+        "translation": "Gate House"
+      }
+    }
+  },
+  "description": {
+    "text": "These old defensive bastions have been left to fall in to ruin. Gate House allows for a last ditch effort to protect your Base and tear down your foes. One Cube and a Base.",
+    "data": {
+      "es": {
+        "original": "These old defensive bastions have been left to fall in to ruin. Gate House allows for a last ditch effort to protect your Base and tear down your foes. One Cube and a Base.",
+        "translation": "No dejes que este bastión caiga en el olvido.\nUn generador y un núcleo."
+      },
+      "fr": {
+        "original": "These old defensive bastions have been left to fall in to ruin. Gate House allows for a last ditch effort to protect your Base and tear down your foes. One Cube and a Base.",
+        "translation": "Ces vieux bastions de défense tombent aujourd'hui en ruine. Rassemblez vos dernières forces pour protéger votre base et déferler sur vos ennemis. Un cube et une base."
+      },
+      "de": {
+        "original": "These old defensive bastions have been left to fall in to ruin. Gate House allows for a last ditch effort to protect your Base and tear down your foes. One Cube and a Base.",
+        "translation": "Diese alten Festungen sind nur noch Ruinen. Verteidigt in einer letzten Anstrengung eure Basis und vernichtet eure Gegner! Ein Generator und eine Basis."
+      },
+      "ru": {
+        "original": "These old defensive bastions have been left to fall in to ruin. Gate House allows for a last ditch effort to protect your Base and tear down your foes. One Cube and a Base.",
+        "translation": "Эти старые оборонительные бастионы были покинуты и разрушены. Застава предоставляет последний шанс, чтобы защитить базу и сокрушить врагов. Один куб и база."
+      },
+      "pt": {
+        "original": "These old defensive bastions have been left to fall in to ruin. Gate House allows for a last ditch effort to protect your Base and tear down your foes. One Cube and a Base.",
+        "translation": "Estes antigos bastiões defensivos foram abandonados em ruína. Gate House permite um último esforço desesperado para proteger sua base e acabar com seus adversários. Um Cubo e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-gate-house-thumb",
+  "large_image": "Gui/Maps/arena-gate-house-full"
+}

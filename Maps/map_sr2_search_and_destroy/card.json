@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_search_and_destroy",
+  "scope": "public",
+  "name": {
+    "text": "Search and Destroy",
+    "data": {
+      "ru": {
+        "original": "Search and Destroy",
+        "translation": "Search and Destroy"
+      },
+      "es": {
+        "original": "Search and Destroy",
+        "translation": "Search and Destroy"
+      },
+      "de": {
+        "original": "Search and Destroy",
+        "translation": "Search and Destroy"
+      },
+      "pt": {
+        "original": "Search and Destroy",
+        "translation": "Search and Destroy"
+      },
+      "fr": {
+        "original": "Search and Destroy",
+        "translation": "Search and Destroy"
+      }
+    }
+  },
+  "description": {
+    "text": "Hunt down the opposing team and annihilate their Base to ensure your victory. One Base.",
+    "data": {
+      "ru": {
+        "original": "Hunt down the opposing team and annihilate their Base to ensure your victory. One Base.",
+        "translation": "Выследи врага, а затем сровняй с землей его базу. Одна база."
+      },
+      "es": {
+        "original": "Hunt down the opposing team and annihilate their Base to ensure your victory. One Base.",
+        "translation": "Acorrala al equipo enemigo y no les des escapatoria.\nUn núcleo."
+      },
+      "de": {
+        "original": "Hunt down the opposing team and annihilate their Base to ensure your victory. One Base.",
+        "translation": "Jagt das gegnerische Team und zerstört ihre Basis, um euch den Sieg zu sichern. Eine Basis."
+      },
+      "pt": {
+        "original": "Hunt down the opposing team and annihilate their Base to ensure your victory. One Base.",
+        "translation": "Persiga a equipe inimiga e aniquile sua base para assegurar a vitória. Uma Base."
+      },
+      "fr": {
+        "original": "Hunt down the opposing team and annihilate their Base to ensure your victory. One Base.",
+        "translation": "Traquez vos ennemis et annihilez leur base pour remporter la victoire. Une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-search-and-destroy-thumb2",
+  "large_image": "Gui/Maps/arena-search-and-destroy-full1"
+}

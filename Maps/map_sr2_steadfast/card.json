@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_steadfast",
+  "scope": "public",
+  "name": {
+    "text": "Steadfast",
+    "data": {
+      "ru": {
+        "original": "Steadfast",
+        "translation": "Steadfast"
+      },
+      "es": {
+        "original": "Steadfast",
+        "translation": "Steadfast"
+      },
+      "de": {
+        "original": "Steadfast",
+        "translation": "Steadfast"
+      },
+      "pt": {
+        "original": "Steadfast",
+        "translation": "Steadfast"
+      },
+      "fr": {
+        "original": "Steadfast",
+        "translation": "Steadfast"
+      }
+    }
+  },
+  "description": {
+    "text": "Thick fortress walls stand strong against the onslaught of the other side. One Base.",
+    "data": {
+      "ru": {
+        "original": "Thick fortress walls stand strong against the onslaught of the other side. One Base.",
+        "translation": "Толстые стены выдержат яростный натиск врага. Одна база."
+      },
+      "es": {
+        "original": "Thick fortress walls stand strong against the onslaught of the other side. One Base.",
+        "translation": "Combate sin tregua bajo la luz de la luna.\nUn núcleo."
+      },
+      "de": {
+        "original": "Thick fortress walls stand strong against the onslaught of the other side. One Base.",
+        "translation": "Mächtige Festungsmauern erheben sich gegen den Ansturm der Gegner. Eine Basis."
+      },
+      "pt": {
+        "original": "Thick fortress walls stand strong against the onslaught of the other side. One Base.",
+        "translation": "Espessas muralhas de fortaleza resistem a um furioso ataque do outro lado. Uma Base."
+      },
+      "fr": {
+        "original": "Thick fortress walls stand strong against the onslaught of the other side. One Base.",
+        "translation": "Des murs défensifs épais résistent aux vagues d'assaut. Une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-steadfast-thumb",
+  "large_image": "Gui/Maps/arena-steadfast-full"
+}

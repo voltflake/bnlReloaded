@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_pillerd",
+  "scope": "public",
+  "name": {
+    "text": "Pillerd",
+    "data": {
+      "es": {
+        "original": "Pillerd",
+        "translation": "Pillerd"
+      },
+      "fr": {
+        "original": "Pillerd",
+        "translation": "Pillerd"
+      },
+      "de": {
+        "original": "Pillerd",
+        "translation": "Pillerd"
+      },
+      "pt": {
+        "original": "Pillerd",
+        "translation": "Pillerd"
+      },
+      "ru": {
+        "original": "Pillerd",
+        "translation": "Pillerd"
+      }
+    }
+  },
+  "description": {
+    "text": "Staggered columns punctuate the landscape, duck and cover to the objective. One Base.",
+    "data": {
+      "es": {
+        "original": "Staggered columns punctuate the landscape, duck and cover to the objective. One Base.",
+        "translation": "Las columnas acentúan el paisaje.\nUn núcleo."
+      },
+      "fr": {
+        "original": "Staggered columns punctuate the landscape, duck and cover to the objective. One Base.",
+        "translation": "D'immenses colonnes éparpillées recouvrent le terrain. Déplacez-vous à couvert pour atteindre l'objectif ! Une base."
+      },
+      "de": {
+        "original": "Staggered columns punctuate the landscape, duck and cover to the objective. One Base.",
+        "translation": "Diese Landschaft ist voller Säulen. Nutzt sie als Deckung und arbeitet euch zum Ziel vor. Eine Basis."
+      },
+      "pt": {
+        "original": "Staggered columns punctuate the landscape, duck and cover to the objective. One Base.",
+        "translation": "Colunas tortas entrecortam a paisagem. Use-as como cobertura para chegar ao objetivo. Uma Base."
+      },
+      "ru": {
+        "original": "Staggered columns punctuate the landscape, duck and cover to the objective. One Base.",
+        "translation": "Поле боя — это исписанный лист бумаги, а колонны — знаки препинания на нем. Они — вокруг цели, закрывают ее. Одна база."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-pillerd-thumb",
+  "large_image": "Gui/Maps/arena-pillerd-full"
+}

@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_citadel",
+  "scope": "public",
+  "name": {
+    "text": "Citadel",
+    "data": {
+      "ru": {
+        "original": "Citadel",
+        "translation": "Citadel"
+      },
+      "es": {
+        "original": "Citadel",
+        "translation": "Citadel"
+      },
+      "de": {
+        "original": "Citadel",
+        "translation": "Citadel"
+      },
+      "pt": {
+        "original": "Citadel",
+        "translation": "Citadel"
+      },
+      "fr": {
+        "original": "Citadel",
+        "translation": "Citadel"
+      }
+    }
+  },
+  "description": {
+    "text": "Battle over and under the citadel. One Base.",
+    "data": {
+      "ru": {
+        "original": "Battle over and under the citadel. One Base.",
+        "translation": "Бой можно вести как на цитадели, так и под ней. Одна база."
+      },
+      "es": {
+        "original": "Battle over and under the citadel. One Base.",
+        "translation": "Ataca la ciudadela por arriba o por abajo.\nUn núcleo."
+      },
+      "de": {
+        "original": "Battle over and under the citadel. One Base.",
+        "translation": "Kämpft über und unter der Citadel! Eine Basis."
+      },
+      "pt": {
+        "original": "Battle over and under the citadel. One Base.",
+        "translation": "Batalhas por cima e por baixo de uma fortaleza. Uma Base."
+      },
+      "fr": {
+        "original": "Battle over and under the citadel. One Base.",
+        "translation": "Affrontez-vous sur les hauteurs ou dans les profondeurs de la citadelle. Une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-citadel-thumb",
+  "large_image": "Gui/Maps/arena-citadel-full"
+}

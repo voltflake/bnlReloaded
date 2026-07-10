@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_mountain_express_night",
+  "scope": "public",
+  "name": {
+    "text": "[DRAFT] Mountain Express ",
+    "data": {
+      "ru": {
+        "original": "[DRAFT] Mountain Express ",
+        "translation": "[DRAFT] Mountain Express"
+      },
+      "es": {
+        "original": "[DRAFT] Mountain Express ",
+        "translation": "[DRAFT] Mountain Express"
+      },
+      "de": {
+        "original": "[DRAFT] Mountain Express ",
+        "translation": "[DRAFT] Mountain Express "
+      },
+      "pt": {
+        "original": "[DRAFT] Mountain Express ",
+        "translation": "[DRAFT] Mountain Express"
+      },
+      "fr": {
+        "original": "[DRAFT] Mountain Express ",
+        "translation": "[DRAFT] Mountain Express"
+      }
+    }
+  },
+  "description": {
+    "text": "[DRAFT] Expedition grade. Two Cubes and a Base across varied terrain.",
+    "data": {
+      "ru": {
+        "original": "[DRAFT] Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "[DRAFT] Expedition grade. Two Cubes and a Base across varied terrain."
+      },
+      "es": {
+        "original": "[DRAFT] Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "[DRAFT] Un terreno variado para exploradores entusiastas.\nDos generadores y un núcleo."
+      },
+      "de": {
+        "original": "[DRAFT] Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "[DRAFT] Geht auf Entdeckungsreise! Zwei Generatoren und eine Basis in unterschiedlichen Terrains."
+      },
+      "pt": {
+        "original": "[DRAFT] Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "[DRAFT] Uma verdadeira expedição. Dois Cubos e uma Base em terrenos variados."
+      },
+      "fr": {
+        "original": "[DRAFT] Expedition grade. Two Cubes and a Base across varied terrain.",
+        "translation": "[DRAFT] Une arène qui relève de l'expédition. Deux cubes et une base avec des terrains variés."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-mountain-express",
+  "large_image": "Gui/Maps/arena-mountain-express"
+}

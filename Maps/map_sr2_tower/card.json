@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_tower",
+  "scope": "public",
+  "name": {
+    "text": "Tower",
+    "data": {
+      "ru": {
+        "original": "Tower",
+        "translation": "Tower"
+      },
+      "es": {
+        "original": "Tower",
+        "translation": "Tower"
+      },
+      "de": {
+        "original": "Tower",
+        "translation": "Tower"
+      },
+      "fr": {
+        "original": "Tower",
+        "translation": "Tower"
+      },
+      "pt": {
+        "original": "Tower",
+        "translation": "Tower"
+      }
+    }
+  },
+  "description": {
+    "text": "Two massive structures on a narrow spit of land. One Cube and a Base.",
+    "data": {
+      "ru": {
+        "original": "Two massive structures on a narrow spit of land. One Cube and a Base.",
+        "translation": "Два массивных строения на клочке земли. Один куб и база."
+      },
+      "es": {
+        "original": "Two massive structures on a narrow spit of land. One Cube and a Base.",
+        "translation": "Dos estructuras gigantes en un pequeño terruño.\nUn generador y un núcleo."
+      },
+      "de": {
+        "original": "Two massive structures on a narrow spit of land. One Cube and a Base.",
+        "translation": "Zwei massive Gebilde auf einer schmalen Spur von Land. Ein Generator und eine Basis."
+      },
+      "fr": {
+        "original": "Two massive structures on a narrow spit of land. One Cube and a Base.",
+        "translation": "Deux structures monumentales sur une langue de terre étroite. Un cube et une base."
+      },
+      "pt": {
+        "original": "Two massive structures on a narrow spit of land. One Cube and a Base.",
+        "translation": "Duas enormes estruturas numa faixa estreita de terra. Um Cubo e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-tower-thumb",
+  "large_image": "Gui/Maps/arena-tower-full"
+}

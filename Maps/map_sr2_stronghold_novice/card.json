@@ -1,0 +1,61 @@
+{
+  "category": "map",
+  "_id": "map_sr2_stronghold_novice",
+  "scope": "public",
+  "name": {
+    "text": "Bulwark",
+    "data": {
+      "de": {
+        "original": "Bulwark",
+        "translation": "Bulwark"
+      },
+      "pt": {
+        "original": "Bulwark",
+        "translation": "Bulwark"
+      },
+      "fr": {
+        "original": "Bulwark",
+        "translation": "Bulwark"
+      },
+      "es": {
+        "original": "Bulwark",
+        "translation": "Bulwark"
+      },
+      "ru": {
+        "original": "Bulwark",
+        "translation": "Bulwark"
+      }
+    }
+  },
+  "description": {
+    "text": "Take down their walls! One Base.",
+    "data": {
+      "en": {
+        "original": "Take down their walls! One Base.",
+        "translation": ""
+      },
+      "de": {
+        "original": "Take down their walls! One Base.",
+        "translation": "Bringt ihre Mauern zum Einstürzen! Eine Basis."
+      },
+      "pt": {
+        "original": "Take down their walls! One Base.",
+        "translation": "Derrube as muralhas! Uma Base."
+      },
+      "fr": {
+        "original": "Take down their walls! One Base.",
+        "translation": "Prenez les murs d'assaut ! Une base."
+      },
+      "es": {
+        "original": "Take down their walls! One Base.",
+        "translation": "¡Derriba las paredes que lo rodean!\nUn núcleo."
+      },
+      "ru": {
+        "original": "Take down their walls! One Base.",
+        "translation": "Немного настойчивости, и вражеские стены падут. Одна база."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-bulwark-thumb",
+  "large_image": "Gui/Maps/arena-bulwark-full"
+}

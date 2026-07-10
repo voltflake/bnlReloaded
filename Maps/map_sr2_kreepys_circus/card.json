@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_kreepys_circus",
+  "scope": "public",
+  "name": {
+    "text": "Kreepy's Circus",
+    "data": {
+      "es": {
+        "original": "Kreepy's Circus",
+        "translation": "Kreepy's Circus"
+      },
+      "de": {
+        "original": "Kreepy's Circus",
+        "translation": "Kreepy's Circus"
+      },
+      "pt": {
+        "original": "Kreepy's Circus",
+        "translation": "Kreepy's Circus"
+      },
+      "ru": {
+        "original": "Kreepy's Circus",
+        "translation": "Kreepy's Circus"
+      },
+      "fr": {
+        "original": "Kreepy's Circus",
+        "translation": "Kreepy's Circus"
+      }
+    }
+  },
+  "description": {
+    "text": "As the sun begins to set and the light begins to fade, which heroes and villains will emerge from the big top at the circus? One Cube and a Base.",
+    "data": {
+      "es": {
+        "original": "As the sun begins to set and the light begins to fade, which heroes and villains will emerge from the big top at the circus? One Cube and a Base.",
+        "translation": "Todo listo para que empiece la función.\nUn generador y un núcleo."
+      },
+      "ru": {
+        "original": "As the sun begins to set and the light begins to fade, which heroes and villains will emerge from the big top at the circus? One Cube and a Base.",
+        "translation": "Солнце начинает заходить, и свет тускнеет. Какие же герои и злодеи появятся из палатки цирка? Один куб и база."
+      },
+      "de": {
+        "original": "As the sun begins to set and the light begins to fade, which heroes and villains will emerge from the big top at the circus? One Cube and a Base.",
+        "translation": "Welche Helden und Schurken werden siegen, wenn die Sonne über dem Zirkus untergeht? Ein Generator und eine Basis."
+      },
+      "fr": {
+        "original": "As the sun begins to set and the light begins to fade, which heroes and villains will emerge from the big top at the circus? One Cube and a Base.",
+        "translation": "Le soleil se couche, l'obscurité descend : qui des héros et des méchants va émerger du chapiteau ? Un cube et une base."
+      },
+      "pt": {
+        "original": "As the sun begins to set and the light begins to fade, which heroes and villains will emerge from the big top at the circus? One Cube and a Base.",
+        "translation": "Quando o sol começar a se pôr e as luzes se desvanecerem, quais heróis e vilões surgirão na grande tenda do circo? Um Cubo e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-kreepys-circus-thumb",
+  "large_image": "Gui/Maps/arena-kreepys-circus-full"
+}

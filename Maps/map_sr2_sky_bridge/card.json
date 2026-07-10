@@ -1,0 +1,61 @@
+{
+  "category": "map",
+  "_id": "map_sr2_sky_bridge",
+  "scope": "public",
+  "name": {
+    "text": "Sky Bridge",
+    "data": {
+      "en": {
+        "original": "Sky Bridge",
+        "translation": "Sky Bridge"
+      },
+      "es": {
+        "original": "Sky Bridge",
+        "translation": "Sky Bridge"
+      },
+      "ru": {
+        "original": "Sky Bridge",
+        "translation": "Sky Bridge"
+      },
+      "de": {
+        "original": "Sky Bridge",
+        "translation": "Sky Bridge"
+      },
+      "fr": {
+        "original": "Sky Bridge",
+        "translation": "Sky Bridge"
+      },
+      "pt": {
+        "original": "Sky Bridge",
+        "translation": "Sky Bridge"
+      }
+    }
+  },
+  "description": {
+    "text": "Go across, under, over, or alongside to take the bridge and secure victory. Two Cubes and a Base.",
+    "data": {
+      "de": {
+        "original": "Go across, under, over, or alongside to take the bridge and secure victory. Two Cubes and a Base.",
+        "translation": "Nehmt die Brücke ein und sichert euch den Sieg! Zwei Generatoren und eine Basis."
+      },
+      "es": {
+        "original": "Go across, under, over, or alongside to take the bridge and secure victory. Two Cubes and a Base.",
+        "translation": "Por arriba, por abajo o cruza el puente.\nDos generadores y un núcleo."
+      },
+      "ru": {
+        "original": "Go across, under, over, or alongside to take the bridge and secure victory. Two Cubes and a Base.",
+        "translation": "Чтобы захватить мост и победить, пройдите по нему, под ним, над ним или вдоль него. Два куба и база."
+      },
+      "pt": {
+        "original": "Go across, under, over, or alongside to take the bridge and secure victory. Two Cubes and a Base.",
+        "translation": "Vá por cima, por baixo ou pelas laterais para tomar a ponte e assegurar a vitória. Dois Cubos e uma Base."
+      },
+      "fr": {
+        "original": "Go across, under, over, or alongside to take the bridge and secure victory. Two Cubes and a Base.",
+        "translation": "Traversez l'arène par tous les moyens pour prendre le pont et rafler la victoire ! Deux cubes et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-sky-bridge-thumb",
+  "large_image": "Gui/Maps/arena-sky-bridge-full"
+}

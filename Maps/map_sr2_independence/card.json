@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_independence",
+  "scope": "public",
+  "name": {
+    "text": "E Pluribus Unum",
+    "data": {
+      "ru": {
+        "original": "E Pluribus Unum",
+        "translation": "E Pluribus Unum"
+      },
+      "es": {
+        "original": "E Pluribus Unum",
+        "translation": "E Pluribus Unum"
+      },
+      "de": {
+        "original": "E Pluribus Unum",
+        "translation": "E Pluribus Unum"
+      },
+      "pt": {
+        "original": "E Pluribus Unum",
+        "translation": "E Pluribus Unum"
+      },
+      "fr": {
+        "original": "E Pluribus Unum",
+        "translation": "E Pluribus Unum"
+      }
+    }
+  },
+  "description": {
+    "text": "Party like it's 1776! One Cube and a Base.",
+    "data": {
+      "ru": {
+        "original": "Party like it's 1776! One Cube and a Base.",
+        "translation": "ВСПОМНИМ 1776-й! Один куб и база."
+      },
+      "es": {
+        "original": "Party like it's 1776! One Cube and a Base.",
+        "translation": "¡A festejar como si fuera 1776!\nUn generador y un núcleo."
+      },
+      "de": {
+        "original": "Party like it's 1776! One Cube and a Base.",
+        "translation": "Feiert, als wäre es 1776! Ein Generator und eine Basis."
+      },
+      "pt": {
+        "original": "Party like it's 1776! One Cube and a Base.",
+        "translation": "Festeje como se fosse 1776! Um Cubo e uma Base."
+      },
+      "fr": {
+        "original": "Party like it's 1776! One Cube and a Base.",
+        "translation": "Faites la fête comme en 1776 ! Un cube et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-e-pluribus-unum-thumb",
+  "large_image": "Gui/Maps/arena-e-pluribus-unum-full"
+}

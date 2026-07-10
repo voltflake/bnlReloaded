@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_get_cutting_mid_edit",
+  "scope": "public",
+  "name": {
+    "text": "A Cut Above Mid Edit",
+    "data": {
+      "ru": {
+        "original": "A Cut Above",
+        "translation": "A Cut Above"
+      },
+      "es": {
+        "original": "A Cut Above",
+        "translation": "A Cut Above"
+      },
+      "de": {
+        "original": "A Cut Above",
+        "translation": "A Cut Above"
+      },
+      "pt": {
+        "original": "A Cut Above",
+        "translation": "A Cut Above"
+      },
+      "fr": {
+        "original": "A Cut Above",
+        "translation": "A Cut Above"
+      }
+    }
+  },
+  "description": {
+    "text": "Towers galore to climb or destroy.  Two Cubes and a Base.",
+    "data": {
+      "ru": {
+        "original": "Towers galore to climb or destroy.  Two Cubes and a Base.",
+        "translation": "Башни повсюду - можно залезть, можно разрушить. Два куба и база."
+      },
+      "es": {
+        "original": "Towers galore to climb or destroy.  Two Cubes and a Base.",
+        "translation": "Torres por doquier para trepar o destruir.\nDos generadores y un núcleo."
+      },
+      "de": {
+        "original": "Towers galore to climb or destroy.  Two Cubes and a Base.",
+        "translation": "Türme zum Erklimmen und Zerstören im Übermaß! Zwei Generatoren und eine Basis."
+      },
+      "pt": {
+        "original": "Towers galore to climb or destroy.  Two Cubes and a Base.",
+        "translation": "Muitas torres para escalar ou destruir. Dois Cubos e uma Base."
+      },
+      "fr": {
+        "original": "Towers galore to climb or destroy.  Two Cubes and a Base.",
+        "translation": "Des tours en veux-tu en voilà. Deux cubes et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-a-cut-above-thumb",
+  "large_image": "Gui/Maps/arena-a-cut-above-full"
+}

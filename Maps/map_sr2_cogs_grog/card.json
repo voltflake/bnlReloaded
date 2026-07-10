@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_cogs_grog",
+  "scope": "public",
+  "name": {
+    "text": "Cog's Grog",
+    "data": {
+      "ru": {
+        "original": "Cog's Grog",
+        "translation": "Cog's Grog"
+      },
+      "es": {
+        "original": "Cog's Grog",
+        "translation": "Cog's Grog"
+      },
+      "de": {
+        "original": "Cog's Grog",
+        "translation": "Cog's Grog"
+      },
+      "pt": {
+        "original": "Cog's Grog",
+        "translation": "Cog's Grog"
+      },
+      "fr": {
+        "original": "Cog's Grog",
+        "translation": "Cog's Grog"
+      }
+    }
+  },
+  "description": {
+    "text": "Defend the booty fellow salty sea dawgs, use all hidden paths to sabotage the enemies grog. One Cube and a Base.",
+    "data": {
+      "ru": {
+        "original": "Defend the booty fellow salty sea dawgs, use all hidden paths to sabotage the enemies grog. One Cube and a Base.",
+        "translation": "Настоящий пират не только товарища в беде не бросит, но и сделает всё, чтобы вместе одолеть врага. Сделать это можно с помощью секретных ходов. Один куб и база."
+      },
+      "es": {
+        "original": "Defend the booty fellow salty sea dawgs, use all hidden paths to sabotage the enemies grog. One Cube and a Base.",
+        "translation": "Un escenario de piratas con brisa marina y mucho grog.\nUn generador y un núcleo."
+      },
+      "de": {
+        "original": "Defend the booty fellow salty sea dawgs, use all hidden paths to sabotage the enemies grog. One Cube and a Base.",
+        "translation": "Verteidigt eure Schätze, ihr Seebären, und nutzt versteckte Pfade, um den Rum der Gegner zu sabotieren! Ein Generator und eine Basis."
+      },
+      "pt": {
+        "original": "Defend the booty fellow salty sea dawgs, use all hidden paths to sabotage the enemies grog. One Cube and a Base.",
+        "translation": "Defenda os tesouros dos companheiros lobos-do-mar, e use os caminhos escondidos para sabotar o rum inimigo. Um Cubo e uma Base."
+      },
+      "fr": {
+        "original": "Defend the booty fellow salty sea dawgs, use all hidden paths to sabotage the enemies grog. One Cube and a Base.",
+        "translation": "À l'abordage, marins d'eau douce ! Empruntez les passages secrets pour voler le rhum des ennemis ! Un cube et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-cogs-grog-thumb",
+  "large_image": "Gui/Maps/arena-cogs-grog-full"
+}

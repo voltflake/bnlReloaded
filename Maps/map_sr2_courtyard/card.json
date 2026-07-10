@@ -1,0 +1,15 @@
+{
+  "category": "map",
+  "_id": "map_sr2_courtyard",
+  "scope": "public",
+  "name": {
+    "text": "Courtyard",
+    "data": {}
+  },
+  "description": {
+    "text": "A serene courtyard repurposed for combat with a centeral structure. One base.",
+    "data": {}
+  },
+  "image": "Gui/Maps/map_sr2_courtyard",
+  "large_image": "Gui/Maps/map_sr2_courtyard"
+}

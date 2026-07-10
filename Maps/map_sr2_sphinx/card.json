@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_sphinx",
+  "scope": "public",
+  "name": {
+    "text": "Jinxed Sphinx",
+    "data": {
+      "es": {
+        "original": "Jinxed Sphinx",
+        "translation": "Jinxed Sphinx"
+      },
+      "fr": {
+        "original": "Jinxed Sphinx",
+        "translation": "Jinxed Sphinx"
+      },
+      "de": {
+        "original": "Jinxed Sphinx",
+        "translation": "Jinxed Sphinx"
+      },
+      "pt": {
+        "original": "Jinxed Sphinx",
+        "translation": "Esfinge Amaldiçoada"
+      },
+      "ru": {
+        "original": "Jinxed Sphinx",
+        "translation": "Jinxed Sphinx"
+      }
+    }
+  },
+  "description": {
+    "text": "Shifting sands have revealed an ancient location in which Heroes can battle over and around the formidable monuments. Two Cubes and a Base. ",
+    "data": {
+      "es": {
+        "original": "Shifting sands have revealed an ancient location in which Heroes can battle over and around the formidable monuments. Two Cubes and a Base. ",
+        "translation": "Arena, tesoros ancestrales y la maldición de una momia.\nDos generadores y un núcleo."
+      },
+      "fr": {
+        "original": "Shifting sands have revealed an ancient location in which Heroes can battle over and around the formidable monuments. Two Cubes and a Base. ",
+        "translation": "Les sables mouvants ont révélé un site antique, où les héros peuvent jouer à cache-cache parmi les monuments pharaoniques. Deux cubes et une base."
+      },
+      "de": {
+        "original": "Shifting sands have revealed an ancient location in which Heroes can battle over and around the formidable monuments. Two Cubes and a Base. ",
+        "translation": "Die Wüste hat einen uralten Ort mit formidablen Monumenten offenbart! Zwei Generatoren und eine Basis."
+      },
+      "ru": {
+        "original": "Shifting sands have revealed an ancient location in which Heroes can battle over and around the formidable monuments. Two Cubes and a Base. ",
+        "translation": "Пески расступились и открыли древнее место, на котором герои могут сражаться среди внушительных монументов. Два куба и база. "
+      },
+      "pt": {
+        "original": "Shifting sands have revealed an ancient location in which Heroes can battle over and around the formidable monuments. Two Cubes and a Base. ",
+        "translation": "O movimento das areias revelou um local antigo, onde os heróis batalham em cima e em volta de monumentos formidáveis. Dois Cubos e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-jinxed-sphinx-thumb",
+  "large_image": "Gui/Maps/arena-jinxed-sphinx-full"
+}

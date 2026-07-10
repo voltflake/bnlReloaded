@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_block_keep",
+  "scope": "public",
+  "name": {
+    "text": "Block Keep",
+    "data": {
+      "ru": {
+        "original": "Block Keep",
+        "translation": "Block Keep"
+      },
+      "es": {
+        "original": "Block Keep",
+        "translation": "Block Keep"
+      },
+      "de": {
+        "original": "Block Keep",
+        "translation": "Block Keep"
+      },
+      "fr": {
+        "original": "Block Keep",
+        "translation": "Block Keep"
+      },
+      "pt": {
+        "original": "Block Keep",
+        "translation": "Block Keep"
+      }
+    }
+  },
+  "description": {
+    "text": "A slightly flammable outer wall protects a more substantial keep. Two Cubes and a Base.",
+    "data": {
+      "ru": {
+        "original": "A slightly flammable outer wall protects a more substantial keep. Two Cubes and a Base.",
+        "translation": "Массивная крепость с внешними стенами из воспламенимого материала. Два куба и база."
+      },
+      "es": {
+        "original": "A slightly flammable outer wall protects a more substantial keep. Two Cubes and a Base.",
+        "translation": "Un muro externo protege cada fortaleza.\nDos generadores y un núcleo."
+      },
+      "de": {
+        "original": "A slightly flammable outer wall protects a more substantial keep. Two Cubes and a Base.",
+        "translation": "Eine leicht entflammbare Außenwand schützt eine zähe Festung. Zwei Generatoren und eine Basis."
+      },
+      "fr": {
+        "original": "A slightly flammable outer wall protects a more substantial keep. Two Cubes and a Base.",
+        "translation": "Une forteresse aux murs extérieurs inflammables. Deux cubes et une base."
+      },
+      "pt": {
+        "original": "A slightly flammable outer wall protects a more substantial keep. Two Cubes and a Base.",
+        "translation": "Uma barreira ligeiramente inflamável protege uma fortaleza de grande porte. Dois Cubos e uma Base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-block-keep-thumb",
+  "large_image": "Gui/Maps/arena-block-keep-full"
+}

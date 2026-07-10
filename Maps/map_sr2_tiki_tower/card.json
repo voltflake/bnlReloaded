@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_tiki_tower",
+  "scope": "public",
+  "name": {
+    "text": "Tiki Tower",
+    "data": {
+      "ru": {
+        "original": "Tiki Tower",
+        "translation": "Tiki Tower"
+      },
+      "es": {
+        "original": "Tiki Tower",
+        "translation": "Tiki Tower"
+      },
+      "de": {
+        "original": "Tiki Tower",
+        "translation": "Tiki Tower"
+      },
+      "pt": {
+        "original": "Tiki Tower",
+        "translation": "Tiki Tower"
+      },
+      "fr": {
+        "original": "Tiki Tower",
+        "translation": "Tiki Tower"
+      }
+    }
+  },
+  "description": {
+    "text": "Defenses can be sacrificial. Cut down bridges, dig, and prepare layers of defences. One Cube and a Base.",
+    "data": {
+      "ru": {
+        "original": "Defenses can be sacrificial. Cut down bridges, dig, and prepare layers of defences. One Cube and a Base.",
+        "translation": "Иногда надо идти на жертвы. Рушь мосты, рой рвы, в общем — делай всё, чтобы враг не прорвал оборону. Один куб и база."
+      },
+      "es": {
+        "original": "Defenses can be sacrificial. Cut down bridges, dig, and prepare layers of defences. One Cube and a Base.",
+        "translation": "Deberás sacrificar las defensas para avanzar.\nUn generador y un núcleo."
+      },
+      "de": {
+        "original": "Defenses can be sacrificial. Cut down bridges, dig, and prepare layers of defences. One Cube and a Base.",
+        "translation": "Sprengt Brücken, grabt und baut euch eine gute Verteidigung auf. Ein Generator und eine Basis."
+      },
+      "pt": {
+        "original": "Defenses can be sacrificial. Cut down bridges, dig, and prepare layers of defences. One Cube and a Base.",
+        "translation": "As defesas podem ser sacrificiais. Derrube pontes, cave e prepare várias camadas de defesas. Um Cubo e uma Base."
+      },
+      "fr": {
+        "original": "Defenses can be sacrificial. Cut down bridges, dig, and prepare layers of defences. One Cube and a Base.",
+        "translation": "Passez en mode défense sacrificielle. Détruisez les ponts, creusez et enterrez des lignes et des lignes de défense. Un cube et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-tiki-tower-thumb",
+  "large_image": "Gui/Maps/arena-tiki-tower-full"
+}

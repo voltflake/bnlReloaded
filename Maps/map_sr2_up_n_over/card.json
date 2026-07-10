@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_up_n_over",
+  "scope": "public",
+  "name": {
+    "text": "Up N Over",
+    "data": {
+      "ru": {
+        "original": "Up N Over",
+        "translation": "Up N Over"
+      },
+      "es": {
+        "original": "Up N Over",
+        "translation": "Up N Over"
+      },
+      "de": {
+        "original": "Up N Over",
+        "translation": "Up N Over"
+      },
+      "pt": {
+        "original": "Up N Over",
+        "translation": "Up N Over"
+      },
+      "fr": {
+        "original": "Up N Over",
+        "translation": "Up N Over"
+      }
+    }
+  },
+  "description": {
+    "text": "Get up and in to the fight by charging up and over the bridge or choose to flank along the sides of it. One Base.",
+    "data": {
+      "ru": {
+        "original": "Get up and in to the fight by charging up and over the bridge or choose to flank along the sides of it. One Base.",
+        "translation": "Иди на врага в лобовую через мост или обходи его с флагов. Одна база."
+      },
+      "es": {
+        "original": "Get up and in to the fight by charging up and over the bridge or choose to flank along the sides of it. One Base.",
+        "translation": "Flanquea el puente o atraviésalo.\nUn núcleo."
+      },
+      "de": {
+        "original": "Get up and in to the fight by charging up and over the bridge or choose to flank along the sides of it. One Base.",
+        "translation": "Stürzt euch in den Kampf, indem ihr euch hoch über die Brücke katapultiert oder flankiert sie von allen Seiten. Eine Basis."
+      },
+      "pt": {
+        "original": "Get up and in to the fight by charging up and over the bridge or choose to flank along the sides of it. One Base.",
+        "translation": "Entre na luta passando por cima da ponte ou siga pelos flancos. Uma Base."
+      },
+      "fr": {
+        "original": "Get up and in to the fight by charging up and over the bridge or choose to flank along the sides of it. One Base.",
+        "translation": "Il est temps de monter au front ! Menez la charge sur le pont, ou attaquez par les flancs. Une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-up-n-over-thumb2",
+  "large_image": "Gui/Maps/arena-up-n-over-full1"
+}

@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_pipe_mania_mid_edit",
+  "scope": "public",
+  "name": {
+    "text": "Pipe Mania Mid Edit",
+    "data": {
+      "ru": {
+        "original": "Pipe Mania",
+        "translation": "Pipe Mania"
+      },
+      "es": {
+        "original": "Pipe Mania",
+        "translation": "Pipe Mania"
+      },
+      "de": {
+        "original": "Pipe Mania",
+        "translation": "Pipe Mania"
+      },
+      "pt": {
+        "original": "Pipe Mania",
+        "translation": "Pipe Mania"
+      },
+      "fr": {
+        "original": "Pipe Mania",
+        "translation": "Pipe Mania"
+      }
+    }
+  },
+  "description": {
+    "text": "Beware of aspiring plumbers using the pipes to sneak around. One Cube and a Base.",
+    "data": {
+      "ru": {
+        "original": "Beware of aspiring plumbers using the pipes to sneak around. One Cube and a Base.",
+        "translation": "Берегитесь сантехников, по трубам крадущихся. Один куб и база."
+      },
+      "es": {
+        "original": "Beware of aspiring plumbers using the pipes to sneak around. One Cube and a Base.",
+        "translation": "Ten cuidado si te cruzas con algún plomero famoso.\nUn generador y un núcleo."
+      },
+      "de": {
+        "original": "Beware of aspiring plumbers using the pipes to sneak around. One Cube and a Base.",
+        "translation": "Vorsicht vor übereifrigen Klempnern, die sich durch Rohre schleichen! Ein Generator und eine Basis."
+      },
+      "pt": {
+        "original": "Beware of aspiring plumbers using the pipes to sneak around. One Cube and a Base.",
+        "translation": "Cuidado com os aspirantes a encanador usando canos para pegar você de surpresa. Um Cubo e uma Base."
+      },
+      "fr": {
+        "original": "Beware of aspiring plumbers using the pipes to sneak around. One Cube and a Base.",
+        "translation": "Gare aux plombiers du dimanche qui se faufilent dans les tuyaux ! Un cube et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-pipe-mania-thumb",
+  "large_image": "Gui/Maps/arena-pipe-mania-full"
+}

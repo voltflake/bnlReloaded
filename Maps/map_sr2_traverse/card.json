@@ -1,0 +1,57 @@
+{
+  "category": "map",
+  "_id": "map_sr2_traverse",
+  "scope": "public",
+  "name": {
+    "text": "Traverse",
+    "data": {
+      "ru": {
+        "original": "Traverse",
+        "translation": "Traverse"
+      },
+      "es": {
+        "original": "Traverse",
+        "translation": "Traverse"
+      },
+      "de": {
+        "original": "Traverse",
+        "translation": "Traverse"
+      },
+      "pt": {
+        "original": "Traverse",
+        "translation": "Traverse"
+      },
+      "fr": {
+        "original": "Traverse",
+        "translation": "Traverse"
+      }
+    }
+  },
+  "description": {
+    "text": "A solitary bridge spans a vast expanse of water. Defend and attack over this. One Cube and a Base.",
+    "data": {
+      "ru": {
+        "original": "A solitary bridge spans a vast expanse of water. Defend and attack over this. One Cube and a Base.",
+        "translation": "Много воды и один мост — вот и всё поле боя. Защищайся и атакуй. Один куб и база. "
+      },
+      "es": {
+        "original": "A solitary bridge spans a vast expanse of water. Defend and attack over this. One Cube and a Base.",
+        "translation": "Un solo puente comunica ambos extremos.\nUn generador y un núcleo."
+      },
+      "de": {
+        "original": "A solitary bridge spans a vast expanse of water. Defend and attack over this. One Cube and a Base.",
+        "translation": "Eine einsame Brücke führt über eine weite Wasserfläche. Ein Generator und eine Basis."
+      },
+      "pt": {
+        "original": "A solitary bridge spans a vast expanse of water. Defend and attack over this. One Cube and a Base.",
+        "translation": "Uma ponte solitária sobre uma grande extensão de água. Defenda e ataque sobre ela. Um Cubo e uma Base."
+      },
+      "fr": {
+        "original": "A solitary bridge spans a vast expanse of water. Defend and attack over this. One Cube and a Base.",
+        "translation": "Un pont solitaire suspendu au-dessus d'une vaste étendue d'eau. Attaquez et défendez en équilibre ! Un cube et une base."
+      }
+    }
+  },
+  "image": "Gui/Maps/arena-traverse-thumb",
+  "large_image": "Gui/Maps/arena-traverse-full"
+}
