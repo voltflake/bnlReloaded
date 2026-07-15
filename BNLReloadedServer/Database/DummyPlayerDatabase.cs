@@ -1,4 +1,4 @@
-﻿using BNLReloadedServer.BaseTypes;
+using BNLReloadedServer.BaseTypes;
 using BNLReloadedServer.Service;
 using Moserware.Skills;
 
@@ -395,8 +395,7 @@ public class DummyPlayerDatabase : IPlayerDatabase
         var deviceLevels = new Dictionary<Key, int>();
         foreach (var deviceCard in CatalogueHelper.GetCards<CardDeviceGroup>(CardCategory.DeviceGroup))
         {
-            var dCard = Databases.Catalogue.GetCard<CardDevice>(deviceCard.Devices[0]);
-            deviceLevels[deviceCard.Key] = dCard.DeviceLevels.Count;
+            deviceLevels[deviceCard.Key] = 1;
         }
         return deviceLevels;
     }

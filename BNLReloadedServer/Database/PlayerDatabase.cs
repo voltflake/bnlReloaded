@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -379,8 +379,7 @@ public class PlayerDatabase : IPlayerDatabase
         var deviceLevels = new Dictionary<Key, int>();
         foreach (var deviceCard in CatalogueHelper.GetCards<CardDeviceGroup>(CardCategory.DeviceGroup))
         {
-            var dCard = deviceCard.Devices?[0].GetCard<CardDevice>();
-            deviceLevels[deviceCard.Key] = dCard?.DeviceLevels?.Count ?? 1;
+            deviceLevels[deviceCard.Key] = 1;
         }
         return deviceLevels;
     }
