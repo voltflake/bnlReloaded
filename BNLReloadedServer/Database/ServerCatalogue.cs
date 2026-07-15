@@ -10,13 +10,19 @@ public class ServerCatalogue : Catalogue
 
     public ServerCatalogue()
     {
-        var cards = CatalogueCache.UpdateCatalogue(CatalogueCache.Load());
         var tempDict = new Dictionary<Key, Card>(KeyEqualityComparer.Instance);
-        foreach (var card in cards)
+        try
         {
-            if (card.Id == null) continue;
-            card.Key = Key(card.Id);
-            tempDict.Add(card.Key, card);
+            var cards = CatalogueCache.UpdateCatalogue(CatalogueCache.Load());
+            foreach (var card in cards)
+            {
+                if (card.Id == null) continue;
+                card.Key = Key(card.Id);
+                tempDict.Add(card.Key, card);
+            }
+        }
+        catch (FileNotFoundException)
+        {
         }
         
         _db = tempDict.ToFrozenDictionary();

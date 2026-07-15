@@ -17,10 +17,10 @@ public class JsonCatalogueStore(
         fs.Write(JsonSerializer.Serialize(cards, serializerOptions).Replace("\\u00A0", "\u00A0"));
     }
 
-    public override void Load(IEnumerable<CardMap> maps, ExtraMaps? extraMaps)
+    public override List<Card> Load(IEnumerable<CardMap> maps, ExtraMaps? extraMaps)
     {
         using var fs = new StreamReader(File.OpenRead(fromPath));
-        if (JsonSerializer.Deserialize<List<Card>>(fs.ReadToEnd(), serializerOptions) is not {} deserializedCards) return;
+        var deserializedCards = JsonSerializer.Deserialize<List<Card>>(fs.ReadToEnd(), serializerOptions) ?? [];
         deserializedCards.RemoveAll(c => c is CardMap or CardMapData);
             
         // Add maps
@@ -34,5 +34,7 @@ public class JsonCatalogueStore(
         var zipped = (writer.BaseStream as MemoryStream)?.GetBuffer().Zip(0);
         zipped?.CopyTo(fs2);
         zipped?.Close();
+
+        return deserializedCards;
     }
 }

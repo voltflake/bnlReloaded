@@ -1,39 +1,64 @@
-﻿using System.Text.Json;
-using System.Text.RegularExpressions;
+﻿using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using BNLReloadedServer.BaseTypes;
 using BNLReloadedServer.ProtocolHelpers;
 using BNLReloadedServer.ServerTypes;
 using CouchDB.Driver;
-using CouchDB.Driver.Extensions;
-using CouchDB.Driver.Types;
 
 namespace BNLReloadedServer.Database;
 
-public partial class CouchCatalogueStore(
+public class CouchCatalogueStore(
     CouchClient fromDb, 
     string dbName,
     string toPath,
     string deserializedPath,
     JsonSerializerOptions serializerOptions): CatalogueStore
 {
-    private static readonly HashSet<string> Exclude = ["map", "map_data"];
-    
+    private static readonly HttpClient _httpClient = new();
+
+    private class AllDocsResponse
+    {
+        [JsonPropertyName("rows")]
+        public List<DocRow> Rows { get; set; } = [];
+    }
+
+    private class DocRow
+    {
+        [JsonPropertyName("doc")]
+        public JsonElement Doc { get; set; }
+    }
+
     public override void Store(IEnumerable<Card> cards)
     {
         using var fs = new StreamWriter(File.Create(toPath));
         fs.Write(JsonSerializer.Serialize(cards, serializerOptions).Replace("\\u00A0", "\u00A0"));
     }
 
-    public override void Load(IEnumerable<CardMap> maps, ExtraMaps? extraMaps)
+    public override List<Card> Load(IEnumerable<CardMap> maps, ExtraMaps? extraMaps)
     {
-        var database = fromDb.GetDatabase<Card>(dbName);
+        var url = $"{fromDb.Endpoint.OriginalString.TrimEnd('/')}/{dbName}/_all_docs?include_docs=true";
+        using var request = new HttpRequestMessage(HttpMethod.Get, url);
+        var creds = Databases.ConfigDatabase.CouchDbCredentials();
+        request.Headers.Authorization =
+            new System.Net.Http.Headers.AuthenticationHeaderValue("Basic",
+                Convert.ToBase64String(Encoding.ASCII.GetBytes($"{creds.Username}:{creds.Password}")));
 
-        var entries = Enum.GetNames<CardCategory>().Select(e => SnakeRegex().Replace(e, "$1_$2").ToLower())
-            .Where(e => !Exclude.Contains(e)).ToList();
+        var response = _httpClient.SendAsync(request).Result;
+        response.EnsureSuccessStatusCode();
+        var allDocs = response.Content.ReadFromJsonAsync<AllDocsResponse>().Result!;
 
-        List<Card> cards =
-            [..database.Where(r => r.Id != null && entries.Any(e => r.Id.StartsWith(e))).ToListAsync().Result];
-        
+        List<Card> cards = [];
+        foreach (var row in allDocs.Rows)
+        {
+            if (!row.Doc.TryGetProperty("category", out _)) continue;
+            var card = JsonSerializer.Deserialize<Card>(row.Doc.GetRawText(), serializerOptions);
+            if (card != null) cards.Add(card);
+        }
+
+        Console.WriteLine($"Loaded {cards.Count} cards from remote database");
+
         // Add maps
         AddMaps(cards, maps, extraMaps);
 
@@ -45,8 +70,7 @@ public partial class CouchCatalogueStore(
         var zipped = (writer.BaseStream as MemoryStream)?.GetBuffer().Zip(0);
         zipped?.CopyTo(fs2);
         zipped?.Close();
-    }
 
-    [GeneratedRegex("([a-z])([A-Z])")]
-    private static partial Regex SnakeRegex();
+        return cards;
+    }
 }

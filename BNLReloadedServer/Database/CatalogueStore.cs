@@ -84,5 +84,5 @@ public abstract class CatalogueStore
     }
     
     public abstract void Store(IEnumerable<Card> cards);
-    public abstract void Load(IEnumerable<CardMap> maps, ExtraMaps? extraMaps);
+    public abstract List<Card> Load(IEnumerable<CardMap> maps, ExtraMaps? extraMaps);
 }
