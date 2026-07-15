@@ -1,4 +1,4 @@
-﻿using BNLReloadedServer.BaseTypes;
+using BNLReloadedServer.BaseTypes;
 using BNLReloadedServer.Service;
 using Moserware.Skills;
 
@@ -31,5 +31,7 @@ public interface IMasterServerDatabase
     public Task<List<SearchResult>> GetSearchResults(List<uint> playerIds);
     public Task<List<SearchResult>> GetSearchResults(List<ulong> steamIds);
     public Task<List<LeagueLeaderboardRecord>> GetLeaderboard();
+    public Task<List<PlayerData>> GetAllPlayersAsync();
+    public Task<bool> UpdatePlayerAsync(uint playerId, PlayerData updated);
 
 }

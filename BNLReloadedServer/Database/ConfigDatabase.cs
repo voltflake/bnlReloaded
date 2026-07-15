@@ -82,4 +82,10 @@ public class ConfigDatabase : IConfigDatabase
     public bool DebugMode() => _configs.DebugMode;
     
     public bool DoReadline() => _configs.DoReadline;
+    
+    public bool ControlPanelEnabled() => _configs.ControlPanelEnabled;
+    
+    public string ControlPanelHost() => _configs.ControlPanelHost;
+    
+    public int ControlPanelPort() => _configs.ControlPanelPort;
 }

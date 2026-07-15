@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Text;
 using BNLReloadedServer.BaseTypes;
 using BNLReloadedServer.Service;
@@ -576,6 +576,41 @@ public class MasterServerDatabase : IMasterServerDatabase
             SteamId = rec.SteamId,
             Nickname = rec.Username
         }).ToList();
+    }
+
+    public async Task<List<PlayerData>> GetAllPlayersAsync()
+    {
+        var records = await _playerDb.Table<PlayerRecord>().ToListAsync();
+        return records.Select(PlayerData.FromPlayerRecord).ToList();
+    }
+
+    public async Task<bool> UpdatePlayerAsync(uint playerId, PlayerData updated)
+    {
+        await _asyncLock.WaitAsync();
+        try
+        {
+            var record = await _playerDb.Table<PlayerRecord>().Where(x => x.PlayerId == playerId).FirstOrDefaultAsync();
+            if (record == null) return false;
+            record.Username = updated.Nickname;
+            record.PlayerRole = updated.Role;
+            record.Region = updated.Region;
+            record.RatingMean = updated.Rating.Mean;
+            record.RatingDeviation = updated.Rating.StandardDeviation;
+            record.LeagueInfo = updated.League != null ? League.WriteByteRecord(updated.League) : null;
+            record.TutorialTokens = updated.TutorialTokens;
+            record.LookingForFriends = updated.LookingForFriends;
+            record.MatchmakerBanEnd = updated.MatchmakerBanEnd.HasValue
+                ? DateTimeOffset.FromUnixTimeMilliseconds((long)updated.MatchmakerBanEnd.Value) : null;
+            record.GraveyardPermanent = updated.GraveyardPermanent;
+            record.GraveyardLeaveTime = updated.GraveyardLeaveTime.HasValue
+                ? DateTimeOffset.FromUnixTimeMilliseconds((long)updated.GraveyardLeaveTime.Value) : null;
+            await _playerDb.UpdateAsync(record);
+        }
+        finally
+        {
+            _asyncLock.Release();
+        }
+        return true;
     }
 
     public async Task<List<LeagueLeaderboardRecord>> GetLeaderboard()

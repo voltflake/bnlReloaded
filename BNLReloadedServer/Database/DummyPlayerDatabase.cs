@@ -484,4 +484,6 @@ public class DummyPlayerDatabase : IPlayerDatabase
     public void UpdateFriendRequest(uint receiverId, uint senderId)
     {
     }
+
+    public IEnumerable<PlayerData> GetAllPlayers() => [];
 }

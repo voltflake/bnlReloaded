@@ -65,4 +65,10 @@ public class DummyConfigDatabase : IConfigDatabase
     public bool DebugMode() => true;
     
     public bool DoReadline() => false;
+    
+    public bool ControlPanelEnabled() => true;
+    
+    public string ControlPanelHost() => "127.0.0.1";
+    
+    public int ControlPanelPort() => 8080;
 }

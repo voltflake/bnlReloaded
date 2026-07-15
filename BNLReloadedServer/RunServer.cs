@@ -1,4 +1,6 @@
-﻿using BNLReloadedServer.Database;
+﻿using BNLReloadedServer.BaseTypes;
+using BNLReloadedServer.ControlPanel;
+using BNLReloadedServer.Database;
 using BNLReloadedServer.ProtocolHelpers;
 using BNLReloadedServer.Servers;
 using BNLReloadedServer.Service;
@@ -21,7 +23,8 @@ CatalogueStore catalogueStore = useCouch
         new CouchClient(configs.CouchDbEndpoint(), configs.CouchDbCredentials(),
             new CouchClientOptions
             {
-                JsonSerializerOptions = JsonHelper.DefaultSerializerSettings
+                JsonSerializerOptions = JsonHelper.DefaultSerializerSettings,
+                ThrowOnQueryWarning = false
             }),
         configs.CouchDbDatabaseName(),
         toPath,
@@ -33,10 +36,18 @@ CatalogueStore catalogueStore = useCouch
         deserializedPath,
         JsonHelper.DefaultSerializerSettings);
 
+List<Card>? loadedCards = null;
+if (fromJson || (runServer && useCouch))
+    loadedCards = catalogueStore.Load(Databases.MapDatabase.GetMapCards(), Databases.MapDatabase.GrabExtraMaps());
+
+if (loadedCards != null && Databases.Catalogue is ServerCatalogue sc)
+{
+    sc.Replicate(loadedCards);
+    Console.WriteLine($"Replicated {loadedCards.Count} cards to server catalogue");
+}
+
 if (toJson)
     catalogueStore.Store(Databases.Catalogue.All);
-if (fromJson)
-    catalogueStore.Load(Databases.MapDatabase.GetMapCards(), Databases.MapDatabase.GrabExtraMaps());
 
 if (runServer)
 {
@@ -69,6 +80,21 @@ if (runServer)
     regionServer.Start();
     regionClient.ConnectAsync();
     matchServer.Start();
+
+    ControlPanelServer? controlPanel = null;
+    if (Databases.ConfigDatabase.ControlPanelEnabled())
+    {
+        var prefix = $"http://{Databases.ConfigDatabase.ControlPanelHost()}:{Databases.ConfigDatabase.ControlPanelPort()}/";
+        controlPanel = new ControlPanelServer(
+            prefix,
+            server,
+            regionServer,
+            regionClient,
+            matchServer,
+            catalogueStore,
+            (ServerCatalogue)Databases.Catalogue);
+        controlPanel.Start();
+    }
     
     Console.WriteLine("Press Enter to stop the server or '!' to restart the server...");
     try
@@ -98,16 +124,21 @@ if (runServer)
                     }
                     case "refreshCdb" or "refreshCdbLoad" when Databases.Catalogue is ServerCatalogue serverCatalogue:
                     {
-                        if (line == "refreshCdbLoad")
-                        {
-                            catalogueStore.Load(Databases.MapDatabase.GetMapCards(), Databases.MapDatabase.GrabExtraMaps());
-                        }
                         Console.Write("Refreshing cdb...");
-                        var newCardList = CatalogueCache.UpdateCatalogue(CatalogueCache.Load());
-                        serverCatalogue.Replicate(newCardList);
-                        var catalogueReplicator = new ServiceCatalogue(new ServerSender(regionServer));
-                        catalogueReplicator.SendReplicate(newCardList);
-                        Console.WriteLine("Done!");
+                        try
+                        {
+                            var newCardList = line == "refreshCdbLoad"
+                                ? catalogueStore.Load(Databases.MapDatabase.GetMapCards(), Databases.MapDatabase.GrabExtraMaps())
+                                : CatalogueCache.UpdateCatalogue(CatalogueCache.Load());
+                            serverCatalogue.Replicate(newCardList);
+                            var catalogueReplicator = new ServiceCatalogue(new ServerSender(regionServer));
+                            catalogueReplicator.SendReplicate(newCardList);
+                            Console.WriteLine("Done!");
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            Console.WriteLine("Failed - no cache file available");
+                        }
                         break;
                     }
                 }
@@ -130,6 +161,7 @@ if (runServer)
             Databases.MasterServerDatabase.RemoveRegionServer("master");
         }
         matchServer.Stop();
+        controlPanel?.Dispose();
         Console.WriteLine("Done!");
     }
 }

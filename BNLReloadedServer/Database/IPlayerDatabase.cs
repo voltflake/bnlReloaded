@@ -33,6 +33,7 @@ public interface IPlayerDatabase
     public Task<List<FriendRequest>> GetFriendRequestsFrom(uint playerId);
     public Task<List<LeagueLeaderboardRecord>?> GetLeaderboard();
     public bool IsBanned(uint playerId);
+    public IEnumerable<PlayerData> GetAllPlayers();
     public void SetPlayerName(uint playerId, string name);
     public void SetLoadout(uint playerId, Dictionary<Key, LobbyLoadout> loadout);
     public void SetHeroStats(uint playerId, List<HeroStats> heroStats);

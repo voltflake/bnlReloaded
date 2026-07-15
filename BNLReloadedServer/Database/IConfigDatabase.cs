@@ -28,4 +28,7 @@ public interface IConfigDatabase
     public string CouchDbDatabaseName();
     public bool DebugMode();
     public bool DoReadline();
+    public bool ControlPanelEnabled();
+    public string ControlPanelHost();
+    public int ControlPanelPort();
 }

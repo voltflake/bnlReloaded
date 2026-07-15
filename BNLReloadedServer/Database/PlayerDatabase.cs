@@ -672,4 +672,6 @@ public class PlayerDatabase : IPlayerDatabase
 
     public void UpdateFriendRequest(uint receiverId, uint senderId) =>
         _serviceRegionServer.SendFriendRequest(receiverId, senderId);
+
+    public IEnumerable<PlayerData> GetAllPlayers() => _players.Values;
 }
