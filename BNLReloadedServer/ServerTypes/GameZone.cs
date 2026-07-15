@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using System.Timers;
 using BNLReloadedServer.BaseTypes;
 using BNLReloadedServer.Database;
@@ -719,6 +719,22 @@ public partial class GameZone : Updater
         
         _zoneData.UpdateData(phaseUpdate);
         _serviceZone.SendUpdateBarriers(GetBarriersForPhase(nextPhase));
+
+        var buildPhaseDamageKey = new Key("effect_build_phase_extra_world_damage");
+        if (nextPhase is ZonePhaseType.Build or ZonePhaseType.Build2)
+        {
+            foreach (var player in _playerUnits.Values)
+            {
+                player.AddEffect(new ConstEffectInfo(buildPhaseDamageKey), player.Team, null);
+            }
+        }
+        else
+        {
+            foreach (var player in _playerUnits.Values)
+            {
+                player.RemoveEffect(new ConstEffectInfo(buildPhaseDamageKey), player.Team, null);
+            }
+        }
         if (currentPhase is not (ZonePhaseType.Waiting or ZonePhaseType.TutorialInit)) return;
         
         var initMatchStats = new MatchStats

@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using BNLReloadedServer.BaseTypes;
 using BNLReloadedServer.Database;
 using BNLReloadedServer.Octree_Extensions;
@@ -18,6 +18,10 @@ public partial class GameZone
             {
                 _playerUnits.Add(unit.Id, unit);
                 _playerIdToUnitId.Add(unitInit.PlayerId.Value, unit.Id);
+                if (_zoneData.Phase.PhaseType is ZonePhaseType.Build or ZonePhaseType.Build2)
+                {
+                    unit.AddEffect(new ConstEffectInfo(new Key("effect_build_phase_extra_world_damage")), unit.Team, null);
+                }
             }
         }
 
