@@ -11,7 +11,6 @@ public sealed class ControlPanelServer : IDisposable
     private readonly CancellationTokenSource _cts = new();
     private readonly MasterServer? _masterServer;
     private readonly RegionServer _regionServer;
-    private readonly RegionClient _regionClient;
     private readonly MatchServer _matchServer;
     private readonly CatalogueStore _catalogueStore;
     private readonly ServerCatalogue _serverCatalogue;
@@ -28,7 +27,6 @@ public sealed class ControlPanelServer : IDisposable
         string prefix,
         MasterServer? masterServer,
         RegionServer regionServer,
-        RegionClient regionClient,
         MatchServer matchServer,
         CatalogueStore catalogueStore,
         ServerCatalogue serverCatalogue)
@@ -37,7 +35,6 @@ public sealed class ControlPanelServer : IDisposable
         _listener.Prefixes.Add(prefix);
         _masterServer = masterServer;
         _regionServer = regionServer;
-        _regionClient = regionClient;
         _matchServer = matchServer;
         _catalogueStore = catalogueStore;
         _serverCatalogue = serverCatalogue;
@@ -110,7 +107,19 @@ public sealed class ControlPanelServer : IDisposable
 
             if (method == "GET" && path == "/")
             {
-                await ServeHtml(ctx);
+                await ServeFile(ctx, "index.html", "text/html; charset=utf-8");
+                return;
+            }
+
+            if (method == "GET" && path == "/style.css")
+            {
+                await ServeFile(ctx, "style.css", "text/css; charset=utf-8");
+                return;
+            }
+
+            if (method == "GET" && path == "/app.js")
+            {
+                await ServeFile(ctx, "app.js", "application/javascript; charset=utf-8");
                 return;
             }
 
@@ -120,21 +129,9 @@ public sealed class ControlPanelServer : IDisposable
                 return;
             }
 
-            if (method == "POST" && path == "/api/restart")
-            {
-                await ExecuteAction(ctx, RestartServers);
-                return;
-            }
-
-            if (method == "POST" && path == "/api/refreshCdb")
-            {
-                await ExecuteAction(ctx, () => RefreshCatalogue(false));
-                return;
-            }
-
             if (method == "POST" && path == "/api/refreshCdbLoad")
             {
-                await ExecuteAction(ctx, () => RefreshCatalogue(true));
+                await ExecuteAction(ctx, RefreshCatalogue);
                 return;
             }
 
@@ -168,405 +165,14 @@ public sealed class ControlPanelServer : IDisposable
         }
     }
 
-    private static async Task ServeHtml(HttpListenerContext ctx)
+    private static readonly string ControlPanelFolderPath = Path.Combine(AppContext.BaseDirectory, "ControlPanel");
+
+    private static async Task ServeFile(HttpListenerContext ctx, string fileName, string contentType)
     {
-        var html = $$"""
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BNL Reloaded - Control Panel</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0f0f1a; color: #e0e0e0; margin: 0; padding: 2rem;
-  }
-  h1 { color: #fff; margin-bottom: 0.5rem; }
-  .status { color: #aaa; font-size: 0.9rem; margin-bottom: 2rem; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; max-width: 800px; }
-  .card {
-    background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 8px; padding: 1.5rem;
-    transition: border-color 0.2s;
-  }
-  .card:hover { border-color: #4a4a8a; }
-  .card h3 { margin: 0 0 0.5rem; color: #fff; font-size: 1rem; }
-  .card p { margin: 0 0 1rem; color: #999; font-size: 0.85rem; }
-  button {
-    background: #3a3a6a; color: #fff; border: none; border-radius: 4px; padding: 0.6rem 1.2rem;
-    font-size: 0.85rem; cursor: pointer; transition: background 0.2s; width: 100%;
-  }
-  button:hover { background: #5a5a9a; }
-  button:disabled { opacity: 0.5; cursor: not-allowed; }
-  .toast {
-    position: fixed; bottom: 2rem; right: 2rem; background: #1a1a2e; border: 1px solid #3a3a6a;
-    border-radius: 8px; padding: 1rem 1.5rem; display: none; z-index: 100;
-  }
-  .toast.success { border-color: #4caf50; }
-  .toast.error { border-color: #f44336; }
-  pre { margin: 0; font-size: 0.8rem; color: #ccc; }
-  .view { display: none; }
-  .view.active { display: block; }
-  .back-btn { background: #2a2a4a; margin-bottom: 1rem; width: auto; padding: 0.4rem 1rem; }
-  .back-btn:hover { background: #3a3a6a; }
-  table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-  th, td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid #2a2a4a; }
-  th { color: #aaa; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
-  tr.clickable { cursor: pointer; transition: background 0.15s; }
-  tr.clickable:hover { background: #1a1a2e; }
-  .role-badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.75rem; }
-  .role-User { background: #2a2a4a; color: #aaa; }
-  .role-Moderator { background: #2a4a2a; color: #8f8; }
-  .role-Admin { background: #4a3a1a; color: #ff8; }
-  .role-Core { background: #4a1a1a; color: #f88; }
-  .form-group { margin-bottom: 1rem; }
-  .form-group label { display: block; color: #aaa; font-size: 0.8rem; margin-bottom: 0.3rem; }
-  .form-group input, .form-group select {
-    background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 4px; color: #e0e0e0;
-    padding: 0.5rem 0.7rem; font-size: 0.9rem; width: 100%; max-width: 400px;
-  }
-  .form-group input:focus, .form-group select:focus { outline: none; border-color: #5a5a9a; }
-  .form-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .form-row .form-group { flex: 1; min-width: 150px; }
-  .inline-group { display: flex; gap: 1rem; align-items: flex-end; }
-  .inline-group .form-group { margin-bottom: 0; }
-  .save-btn { background: #4caf50; max-width: 200px; }
-  .save-btn:hover { background: #5dbf61; }
-  .search-input {
-    background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 4px; color: #e0e0e0;
-    padding: 0.5rem 0.7rem; font-size: 0.9rem; width: 100%; max-width: 400px; margin-bottom: 1rem;
-  }
-  .player-count { color: #888; font-size: 0.85rem; margin-bottom: 0.5rem; }
-  .checkbox-group input[type="checkbox"] { width: auto; }
-</style>
-</head>
-<body>
-<h1>BNL Reloaded</h1>
-<div class="status" id="status">Loading...</div>
+        var content = await File.ReadAllTextAsync(Path.Combine(ControlPanelFolderPath, fileName));
 
-<div class="view active" id="view-home">
-  <div class="cards">
-    <div class="card">
-      <h3>Restart Server</h3>
-      <p>Restart all server connections</p>
-      <button onclick="exec('restart')">Restart</button>
-    </div>
-    <div class="card">
-      <h3>Refresh Catalogue</h3>
-      <p>Refresh card catalogue from cache</p>
-      <button onclick="exec('refreshCdb')">Refresh</button>
-    </div>
-    <div class="card">
-      <h3>Reload &amp; Refresh</h3>
-      <p>Reload catalogue from DB then refresh</p>
-      <button onclick="exec('refreshCdbLoad')">Reload &amp; Refresh</button>
-    </div>
-    <div class="card">
-      <h3>Player Editor</h3>
-      <p>View and edit player data</p>
-      <button onclick="showPlayers()">Open</button>
-    </div>
-  </div>
-</div>
-
-<div class="view" id="view-players">
-  <button class="back-btn" onclick="showHome()">&larr; Back</button>
-  <h2>Players</h2>
-  <div class="player-count" id="playerCount">Loading...</div>
-  <input class="search-input" id="searchInput" type="text" placeholder="Filter by name, ID, or Steam ID..." oninput="filterPlayers()">
-          <table>
-            <thead><tr><th>ID</th><th>Steam ID</th><th>Nickname</th><th>Role</th><th>Region</th><th>Status</th></tr></thead>
-            <tbody id="playersBody"></tbody>
-          </table>
-</div>
-
-<div class="view" id="view-player">
-  <button class="back-btn" onclick="showPlayers()">&larr; Back</button>
-  <h2 id="playerTitle">Edit Player</h2>
-  <div style="max-width: 700px;">
-    <div class="form-row">
-      <div class="form-group">
-        <label>Player ID</label>
-        <input id="f-id" type="text" readonly>
-      </div>
-      <div class="form-group">
-        <label>Steam ID</label>
-        <input id="f-steam" type="text" readonly>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Nickname</label>
-        <input id="f-nickname" type="text">
-      </div>
-      <div class="form-group">
-        <label>Role</label>
-        <select id="f-role">
-          <option value="1">User</option>
-          <option value="2">Moderator</option>
-          <option value="3">Admin</option>
-          <option value="4">Core</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Region</label>
-        <input id="f-region" type="text" placeholder="e.g. EU, US">
-      </div>
-      <div class="form-group">
-        <label>Looking for Friends</label>
-        <input id="f-looking-friends" type="checkbox" class="checkbox-group">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Rating Mean</label>
-        <input id="f-rating-mean" type="number" step="0.1">
-      </div>
-      <div class="form-group">
-        <label>Rating Deviation</label>
-        <input id="f-rating-dev" type="number" step="0.1">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>League Tier</label>
-        <input id="f-league-tier" type="number">
-      </div>
-      <div class="form-group">
-        <label>League Division</label>
-        <input id="f-league-div" type="number">
-      </div>
-      <div class="form-group">
-        <label>League Points</label>
-        <input id="f-league-pts" type="number">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Tutorial Tokens</label>
-        <input id="f-tokens" type="number">
-      </div>
-      <div class="form-group">
-        <label>Matchmaker Ban End (ms epoch)</label>
-        <input id="f-ban-end" type="text" placeholder="null or unix ms timestamp">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Graveyard Permanent</label>
-        <select id="f-graveyard-perm">
-          <option value="">Same (unchanged)</option>
-          <option value="true">True</option>
-          <option value="false">False</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Graveyard Leave Time (ms epoch)</label>
-        <input id="f-graveyard-leave" type="text" placeholder="null or unix ms timestamp">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>&nbsp;</label>
-        <button class="save-btn" onclick="savePlayer()">Save Changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"><pre id="toastMsg"></pre></div>
-<script>
-let allPlayers = [];
-let currentPlayerId = null;
-
-function showHome() {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById('view-home').classList.add('active');
-  refreshStatus();
-}
-
-function showPlayers() {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById('view-players').classList.add('active');
-  loadPlayers();
-}
-
-function showPlayerEdit(id) {
-  currentPlayerId = id;
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById('view-player').classList.add('active');
-  loadPlayer(id);
-}
-
-async function exec(action) {
-  const btn = event.target;
-  btn.disabled = true;
-  const toast = document.getElementById('toast');
-  const msg = document.getElementById('toastMsg');
-  try {
-    const res = await fetch('/api/' + action, { method: 'POST' });
-    const data = await res.json();
-    toast.className = 'toast ' + (res.ok ? 'success' : 'error');
-    msg.textContent = data.message || data.error || 'Done';
-  } catch(e) {
-    toast.className = 'toast error';
-    msg.textContent = e.message;
-  }
-  toast.style.display = 'block';
-  setTimeout(() => { toast.style.display = 'none'; btn.disabled = false; }, 3000);
-}
-
-async function loadPlayers() {
-  const body = document.getElementById('playersBody');
-  const count = document.getElementById('playerCount');
-  body.innerHTML = '<tr><td colspan="6" style="color:#888;">Loading...</td></tr>';
-  try {
-    const res = await fetch('/api/players');
-    const data = await res.json();
-    allPlayers = data.players || [];
-    count.textContent = allPlayers.length + ' player(s) found';
-    renderPlayers(allPlayers);
-  } catch(e) {
-    body.innerHTML = '<tr><td colspan="6" style="color:#f44;">Failed to load players</td></tr>';
-    count.textContent = 'Error loading players';
-  }
-}
-
-function renderPlayers(players) {
-  const body = document.getElementById('playersBody');
-  if (!players.length) {
-    body.innerHTML = '<tr><td colspan="6" style="color:#888;">No players found</td></tr>';
-    return;
-  }
-  body.innerHTML = players.map(p => '<tr class="clickable" onclick="showPlayerEdit(' + p.id + ')">' +
-    '<td>' + p.id + '</td>' +
-    '<td>' + p.steam_id + '</td>' +
-    '<td>' + esc(p.nickname) + '</td>' +
-    '<td><span class="role-badge role-' + p.role + '">' + p.role + '</span></td>' +
-    '<td>' + esc(p.region || '') + '</td>' +
-    '<td><span style="color:' + (p.online ? '#4caf50' : '#888') + '">' + (p.online ? '● Online' : '○ Offline') + '</span></td>' +
-    '</tr>').join('');
-}
-
-function filterPlayers() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const filtered = allPlayers.filter(p =>
-    p.nickname.toLowerCase().includes(q) ||
-    p.id.toString().includes(q) ||
-    p.steam_id.toString().includes(q) ||
-    (p.region || '').toLowerCase().includes(q)
-  );
-  renderPlayers(filtered);
-}
-
-async function loadPlayer(id) {
-  document.getElementById('playerTitle').textContent = 'Edit Player #' + id;
-  try {
-    const res = await fetch('/api/players/' + id);
-    if (!res.ok) throw new Error('Player not found');
-    const p = await res.json();
-    document.getElementById('f-id').value = p.id;
-    document.getElementById('f-steam').value = p.steam_id;
-    document.getElementById('f-nickname').value = p.nickname;
-    document.getElementById('f-role').value = p.role_id;
-    document.getElementById('f-region').value = p.region || '';
-    document.getElementById('f-looking-friends').checked = p.looking_for_friends;
-    document.getElementById('f-rating-mean').value = p.rating_mean;
-    document.getElementById('f-rating-dev').value = p.rating_deviation;
-    document.getElementById('f-league-tier').value = p.league ? p.league.tier : '';
-    document.getElementById('f-league-div').value = p.league ? p.league.division : '';
-    document.getElementById('f-league-pts').value = p.league ? p.league.points : '';
-    document.getElementById('f-tokens').value = p.tutorial_tokens;
-    document.getElementById('f-ban-end').value = p.matchmaker_ban_end != null ? p.matchmaker_ban_end : '';
-    document.getElementById('f-graveyard-perm').value = p.graveyard_permanent === true ? 'true' : p.graveyard_permanent === false ? 'false' : '';
-    document.getElementById('f-graveyard-leave').value = p.graveyard_leave_time != null ? p.graveyard_leave_time : '';
-  } catch(e) {
-    showToast('error', 'Failed to load player: ' + e.message);
-  }
-}
-
-async function savePlayer() {
-  const body = {
-    nickname: document.getElementById('f-nickname').value,
-    role_id: parseInt(document.getElementById('f-role').value),
-    region: document.getElementById('f-region').value || null,
-    looking_for_friends: document.getElementById('f-looking-friends').checked,
-    rating_mean: parseFloat(document.getElementById('f-rating-mean').value),
-    rating_deviation: parseFloat(document.getElementById('f-rating-dev').value),
-    tutorial_tokens: parseInt(document.getElementById('f-tokens').value) || 0
-  };
-
-  const lt = document.getElementById('f-league-tier').value;
-  const ld = document.getElementById('f-league-div').value;
-  const lp = document.getElementById('f-league-pts').value;
-  if (lt || ld || lp) {
-    body.league_tier = parseInt(lt) || 0;
-    body.league_division = parseInt(ld) || 0;
-    body.league_points = parseInt(lp) || 0;
-  }
-
-  const banEnd = document.getElementById('f-ban-end').value.trim();
-  body.matchmaker_ban_end = banEnd ? parseInt(banEnd) : null;
-
-  const gp = document.getElementById('f-graveyard-perm').value;
-  if (gp === 'true') body.graveyard_permanent = true;
-  else if (gp === 'false') body.graveyard_permanent = false;
-
-  const gl = document.getElementById('f-graveyard-leave').value.trim();
-  body.graveyard_leave_time = gl ? parseInt(gl) : null;
-
-  try {
-    const res = await fetch('/api/players/' + currentPlayerId, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    const data = await res.json();
-    if (res.ok) {
-      showToast('success', 'Player updated');
-    } else {
-      showToast('error', data.error || 'Update failed');
-    }
-  } catch(e) {
-    showToast('error', e.message);
-  }
-}
-
-function showToast(type, msg) {
-  const toast = document.getElementById('toast');
-  const el = document.getElementById('toastMsg');
-  toast.className = 'toast ' + type;
-  el.textContent = msg;
-  toast.style.display = 'block';
-  setTimeout(() => { toast.style.display = 'none'; }, 3000);
-}
-
-function esc(s) {
-  const d = document.createElement('div');
-  d.textContent = s;
-  return d.innerHTML;
-}
-
-async function refreshStatus() {
-  try {
-    const res = await fetch('/api/status');
-    const data = await res.json();
-    document.getElementById('status').textContent =
-      'Running since ' + data.uptime + ' | Players: ' + data.player_count + ' | Regions: ' + data.region_count;
-  } catch { /* ignore */ }
-}
-setInterval(refreshStatus, 5000);
-refreshStatus();
-</script>
-</body>
-</html>
-""";
-
-        ctx.Response.ContentType = "text/html; charset=utf-8";
-        var buf = System.Text.Encoding.UTF8.GetBytes(html);
+        ctx.Response.ContentType = contentType;
+        var buf = System.Text.Encoding.UTF8.GetBytes(content);
         ctx.Response.ContentLength64 = buf.Length;
         await ctx.Response.OutputStream.WriteAsync(buf);
         ctx.Response.OutputStream.Close();
@@ -612,25 +218,12 @@ refreshStatus();
         }
     }
 
-    private void RestartServers()
-    {
-        Console.Write("Control panel: restarting servers...");
-        _masterServer?.Restart();
-        _regionServer.Restart();
-        _regionClient.Disconnect();
-        _regionClient.Reconnect();
-        _matchServer.Restart();
-        Console.WriteLine("Done!");
-    }
-
-    private void RefreshCatalogue(bool reload)
+    private void RefreshCatalogue()
     {
         Console.Write("Control panel: refreshing catalogue...");
         try
         {
-            var newCardList = reload
-                ? _catalogueStore.Load(Databases.MapDatabase.GetMapCards(), Databases.MapDatabase.GrabExtraMaps())
-                : CatalogueCache.UpdateCatalogue(CatalogueCache.Load());
+            var newCardList = _catalogueStore.Load(Databases.MapDatabase.GetMapCards(), Databases.MapDatabase.GrabExtraMaps());
             _serverCatalogue.Replicate(newCardList);
             var catalogueReplicator = new Service.ServiceCatalogue(new ServerSender(_regionServer));
             catalogueReplicator.SendReplicate(newCardList);

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BNL Reloaded - Control Panel</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>BNL Reloaded</h1>
+  <div class="status" id="status">Loading...</div>
+</header>
+
+<main class="container">
+
+<section class="cards">
+  <div class="card">
+    <h3>Refresh CDB</h3>
+    <p>Reload catalogue from DB then refresh</p>
+    <button onclick="exec('refreshCdbLoad')">Refresh CDB</button>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <h2>Players</h2>
+    <div class="player-count" id="playerCount">Loading...</div>
+  </div>
+  <input class="search-input" id="searchInput" type="text" placeholder="Filter by name, ID, or Steam ID..." oninput="filterPlayers()">
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Steam ID</th><th>Nickname</th><th>Role</th><th>Region</th><th>Status</th></tr></thead>
+      <tbody id="playersBody"></tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<div class="overlay" id="overlay" onclick="closePlayerEdit()"></div>
+<div class="view" id="view-player">
+  <div class="view-header">
+    <h2 id="playerTitle">Edit Player</h2>
+    <button class="close-btn" onclick="closePlayerEdit()" aria-label="Close">&times;</button>
+  </div>
+  <div class="view-body">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Player ID</label>
+        <input id="f-id" type="text" readonly>
+      </div>
+      <div class="form-group">
+        <label>Steam ID</label>
+        <input id="f-steam" type="text" readonly>
+      </div>
+      <div class="form-group">
+        <label>Nickname</label>
+        <input id="f-nickname" type="text" readonly>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Role</label>
+        <select id="f-role">
+          <option value="1">User</option>
+          <option value="2">Moderator</option>
+          <option value="3">Admin</option>
+          <option value="4">Core</option>
+        </select>
+      </div>
+    </div>
+
+    <h3>MMR</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Rating Mean</label>
+        <input id="f-mmr" type="number" step="0.1">
+      </div>
+      <div class="form-group">
+        <label>Rating Deviation</label>
+        <input id="f-rating-dev" type="number" step="0.1">
+      </div>
+      <div class="form-group">
+        <label>&nbsp;</label>
+        <button class="save-btn" onclick="saveRoleMmr()">Save Role &amp; MMR</button>
+      </div>
+    </div>
+
+    <h3>Matchmaking Ban</h3>
+    <div class="ban-status" id="mmBanStatus">Loading...</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Ban for</label>
+        <input id="f-mm-ban-amount" type="number" min="1" step="1" placeholder="e.g. 24">
+      </div>
+      <div class="form-group form-group-narrow">
+        <label>Unit</label>
+        <select id="f-mm-ban-unit">
+          <option value="minutes">Minutes</option>
+          <option value="hours" selected>Hours</option>
+          <option value="days">Days</option>
+        </select>
+      </div>
+      <div class="form-group form-group-narrow">
+        <label>&nbsp;</label>
+        <button onclick="banMatchmaking()">Ban</button>
+      </div>
+      <div class="form-group form-group-narrow">
+        <label>&nbsp;</label>
+        <button class="unban-btn" onclick="unbanMatchmaking()">Unban</button>
+      </div>
+    </div>
+
+    <h3>Graveyard Ban</h3>
+    <div class="ban-status" id="gyBanStatus">Loading...</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Ban for</label>
+        <input id="f-gy-ban-amount" type="number" min="1" step="1" placeholder="e.g. 24">
+      </div>
+      <div class="form-group form-group-narrow">
+        <label>Unit</label>
+        <select id="f-gy-ban-unit">
+          <option value="minutes">Minutes</option>
+          <option value="hours" selected>Hours</option>
+          <option value="days">Days</option>
+        </select>
+      </div>
+      <div class="form-group form-group-narrow checkbox-group-wrap">
+        <label>Permanent</label>
+        <input id="f-gy-permanent" type="checkbox" class="checkbox-group">
+      </div>
+      <div class="form-group form-group-narrow">
+        <label>&nbsp;</label>
+        <button onclick="banGraveyard()">Ban</button>
+      </div>
+      <div class="form-group form-group-narrow">
+        <label>&nbsp;</label>
+        <button class="unban-btn" onclick="unbanGraveyard()">Unban</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><pre id="toastMsg"></pre></div>
+<script src="/app.js"></script>
+</body>
+</html>

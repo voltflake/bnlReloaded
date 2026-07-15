@@ -89,7 +89,6 @@ if (runServer)
             prefix,
             server,
             regionServer,
-            regionClient,
             matchServer,
             catalogueStore,
             (ServerCatalogue)Databases.Catalogue);
