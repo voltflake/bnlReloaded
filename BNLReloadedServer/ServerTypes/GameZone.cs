@@ -572,6 +572,15 @@ public partial class GameZone : Updater
         UpdatePhase();
     }
 
+    private static Timer StartTimer(double intervalMs, ElapsedEventHandler handler)
+    {
+        var timer = new Timer(Math.Max(1, intervalMs));
+        timer.AutoReset = false;
+        timer.Elapsed += handler;
+        timer.Start();
+        return timer;
+    }
+
     private void UpdatePhase()
     {
         var currentPhase = _zoneData.Phase.PhaseType;
@@ -601,10 +610,7 @@ public partial class GameZone : Updater
                 
                 if (endTime != null)
                 {
-                    _build1Timer = new Timer(TimeSpan.FromMilliseconds(endTime.Value - startTime.ToUnixTimeMilliseconds()));
-                    _build1Timer.AutoReset = false;
-                    _build1Timer.Elapsed += OnBuild1TimerElapsed;
-                    _build1Timer.Start();
+                    _build1Timer = StartTimer(endTime.Value - startTime.ToUnixTimeMilliseconds(), OnBuild1TimerElapsed);
                 }
                 break;
             }
@@ -622,36 +628,24 @@ public partial class GameZone : Updater
 
                 if (i < respTimes?.Count)
                 {
-                    _respawnIncreaseTimer = new Timer(TimeSpan.FromSeconds(respTimes[i].MatchSeconds).TotalMilliseconds);
-                    _respawnIncreaseTimer.Elapsed += OnRespawnTimerIncreased;
-                    _respawnIncreaseTimer.AutoReset = false;
-                    _respawnIncreaseTimer.Start();
+                    _respawnIncreaseTimer = StartTimer(TimeSpan.FromSeconds(respTimes[i].MatchSeconds).TotalMilliseconds, OnRespawnTimerIncreased);
                 }
                 else if (_zoneData.MatchCard.RespawnLogic?.IncrementRepeatSequence?.Count > 0)
                 {
-                    _respawnIncreaseTimer = new Timer(TimeSpan
+                    _respawnIncreaseTimer = StartTimer(TimeSpan
                         .FromSeconds(_zoneData.MatchCard.RespawnLogic.IncrementRepeatSequence[0].MatchSeconds)
-                        .TotalMilliseconds);
-                    _respawnIncreaseTimer.Elapsed += OnRespawnTimerIncreased;
-                    _respawnIncreaseTimer.AutoReset = false;
-                    _respawnIncreaseTimer.Start();
+                        .TotalMilliseconds, OnRespawnTimerIncreased);
                 }
 
                 if (_zoneData.MatchCard.SupplyLogic?.Sequence is { Count: > 0 } supplySequence)
-                { 
+                {
                     _zoneData.UpdateSupplyTime(supplySequence[0], GetSupplyPosition(supplySequence[0]));
-                    _supplyTimer = new Timer(TimeSpan.FromSeconds(supplySequence[0].Seconds).TotalMilliseconds);
-                    _supplyTimer.Elapsed += OnSupplyTimerElapsed;
-                    _supplyTimer.AutoReset = false;
-                    _supplyTimer.Start();
+                    _supplyTimer = StartTimer(TimeSpan.FromSeconds(supplySequence[0].Seconds).TotalMilliseconds, OnSupplyTimerElapsed);
                 }
                 else if (_zoneData.MatchCard.SupplyLogic?.RepeatSequence is { Count: > 0 } repSequence)
                 {
                     _zoneData.UpdateSupplyTime(repSequence[0], GetSupplyPosition(repSequence[0]));
-                    _supplyTimer = new Timer(TimeSpan.FromSeconds(repSequence[0].Seconds).TotalMilliseconds); 
-                    _supplyTimer.Elapsed += OnSupplyTimerElapsed;
-                    _supplyTimer.AutoReset = false;
-                    _supplyTimer.Start();
+                    _supplyTimer = StartTimer(TimeSpan.FromSeconds(repSequence[0].Seconds).TotalMilliseconds, OnSupplyTimerElapsed);
                 }
                 break;
             case ZonePhaseType.Assault:
@@ -673,10 +667,7 @@ public partial class GameZone : Updater
 
                 if (endTime != null)
                 {
-                    _build2Timer = new Timer(TimeSpan.FromMilliseconds(endTime.Value - startTime.ToUnixTimeMilliseconds()));
-                    _build2Timer.AutoReset = false;
-                    _build2Timer.Elapsed += OnBuild2TimerElapsed;
-                    _build2Timer.Start();
+                    _build2Timer = StartTimer(endTime.Value - startTime.ToUnixTimeMilliseconds(), OnBuild2TimerElapsed);
                 }
                 break;
             case ZonePhaseType.Build2:
