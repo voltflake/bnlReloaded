@@ -778,11 +778,14 @@ public partial class Unit
         {
             if (uCard.InitEffects != null)
             {
-                foreach (var initEffect in uCard.InitEffects) 
+                foreach (var initEffect in uCard.InitEffects)
                 {
-                    effects.Add(initEffect, Databases.Catalogue.GetCard<CardEffect>(initEffect)?.Duration is { } dur
-                        ? (ulong)DateTimeOffset.Now.AddSeconds(dur).ToUnixTimeMilliseconds()
-                        : null);            
+                    if (!effects.TryAdd(initEffect, Databases.Catalogue.GetCard<CardEffect>(initEffect)?.Duration is { } dur
+                            ? (ulong)DateTimeOffset.Now.AddSeconds(dur).ToUnixTimeMilliseconds()
+                            : null))
+                    {
+                        Console.WriteLine($"[WARNING] Unit: card {uCard.Key} has duplicate effect {initEffect} in InitEffects");
+                    }
                 }
             }
 
@@ -790,9 +793,12 @@ public partial class Unit
             {
                 foreach (var enabledEffect in uCard.EnabledEffects)
                 {
-                    effects.Add(enabledEffect, Databases.Catalogue.GetCard<CardEffect>(enabledEffect)?.Duration is { } dur
-                        ? (ulong)DateTimeOffset.Now.AddSeconds(dur).ToUnixTimeMilliseconds()
-                        : null);
+                    if (!effects.TryAdd(enabledEffect, Databases.Catalogue.GetCard<CardEffect>(enabledEffect)?.Duration is { } dur
+                            ? (ulong)DateTimeOffset.Now.AddSeconds(dur).ToUnixTimeMilliseconds()
+                            : null))
+                    {
+                        Console.WriteLine($"[WARNING] Unit: card {uCard.Key} has duplicate effect {enabledEffect} in EnabledEffects");
+                    }
                 }
             }
 
