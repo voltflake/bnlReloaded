@@ -1,4 +1,5 @@
-﻿using BNLReloadedServer.BaseTypes;
+﻿using BNLReloadedServer;
+using BNLReloadedServer.BaseTypes;
 using BNLReloadedServer.ControlPanel;
 using BNLReloadedServer.Database;
 using BNLReloadedServer.ProtocolHelpers;
@@ -6,6 +7,8 @@ using BNLReloadedServer.Servers;
 using BNLReloadedServer.Service;
 using CouchDB.Driver;
 using CouchDB.Driver.Options;
+
+Console.SetOut(new BroadcastingTextWriter(Console.Out));
 
 var configs = Databases.ConfigDatabase;
 var masterMode = configs.IsMaster();
@@ -144,7 +147,8 @@ if (runServer)
             }
             else
             {
-                Task.Delay(Timeout.InfiniteTimeSpan).Wait();
+                await ShutdownSignal.WaitForShutdown;
+                break;
             }
         }
     }

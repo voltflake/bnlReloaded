@@ -20,6 +20,37 @@
     <p>Reload catalogue from DB then refresh</p>
     <button onclick="exec('refreshCdbLoad')">Refresh CDB</button>
   </div>
+  <div class="card">
+    <h3>Reset Server</h3>
+    <p class="note">Requires <code>do_readline: false</code> in configs.json &mdash; with stdin/interactive mode on, this has no effect until Enter is pressed in the server's console.</p>
+    <button class="reset-btn" onclick="resetServer()">Reset Server</button>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <h2>Server Console</h2>
+    <label class="autoscroll-toggle"><input id="f-console-autoscroll" type="checkbox" checked> Auto-scroll</label>
+  </div>
+  <pre id="consoleOutput" class="console-output"></pre>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <h2>Card Lookup</h2>
+  </div>
+  <div class="ban-row">
+    <div class="ban-row-left">
+      <div class="form-group">
+        <label>Card ID or Key hash</label>
+        <input id="f-card-query" type="text" placeholder="e.g. unit_device_generic_bomb_lvl01 or 2777638317" onkeydown="if(event.key==='Enter') lookupCard()">
+      </div>
+    </div>
+    <div class="ban-row-right">
+      <button class="save-btn" onclick="lookupCard()">Lookup</button>
+    </div>
+  </div>
+  <pre id="cardResult" class="card-result"></pre>
 </section>
 
 <section class="panel">
@@ -60,18 +91,6 @@
       </div>
     </div>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label>Role</label>
-        <select id="f-role">
-          <option value="1">User</option>
-          <option value="2">Moderator</option>
-          <option value="3">Admin</option>
-          <option value="4">Core</option>
-        </select>
-      </div>
-    </div>
-
     <h3>MMR</h3>
     <div class="form-row">
       <div class="form-group">
@@ -82,63 +101,85 @@
         <label>Rating Deviation</label>
         <input id="f-rating-dev" type="number" step="0.1">
       </div>
-      <div class="form-group">
+      <div class="form-group form-group-narrow">
         <label>&nbsp;</label>
-        <button class="save-btn" onclick="saveRoleMmr()">Save Role &amp; MMR</button>
+        <button class="save-btn" onclick="saveMmr()">Save MMR</button>
       </div>
     </div>
 
-    <h3>Matchmaking Ban</h3>
-    <div class="ban-status" id="mmBanStatus">Loading...</div>
+    <h3>Loadouts</h3>
     <div class="form-row">
       <div class="form-group">
-        <label>Ban for</label>
-        <input id="f-mm-ban-amount" type="number" min="1" step="1" placeholder="e.g. 24">
+        <label>Character</label>
+        <select id="f-loadout-select" onchange="renderSelectedLoadout()"></select>
       </div>
-      <div class="form-group form-group-narrow">
-        <label>Unit</label>
-        <select id="f-mm-ban-unit">
-          <option value="minutes">Minutes</option>
-          <option value="hours" selected>Hours</option>
-          <option value="days">Days</option>
-        </select>
+    </div>
+    <div id="loadoutDetail" class="loadouts-list"></div>
+
+    <h3>Matchmaking Ban</h3>
+    <div class="ban-status" id="mmBanStatus">Loading...</div>
+    <div class="ban-row">
+      <div class="ban-row-left">
+        <div class="form-group">
+          <label>Ban for</label>
+          <input id="f-mm-ban-amount" type="number" min="1" step="1" placeholder="e.g. 24">
+        </div>
+        <div class="form-group form-group-narrow">
+          <label>Unit</label>
+          <select id="f-mm-ban-unit">
+            <option value="minutes">Minutes</option>
+            <option value="hours" selected>Hours</option>
+            <option value="days">Days</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group form-group-narrow">
-        <label>&nbsp;</label>
-        <button onclick="banMatchmaking()">Ban</button>
-      </div>
-      <div class="form-group form-group-narrow">
-        <label>&nbsp;</label>
+      <div class="ban-row-right">
+        <button class="ban-btn" onclick="banMatchmaking()">Ban</button>
         <button class="unban-btn" onclick="unbanMatchmaking()">Unban</button>
       </div>
     </div>
 
     <h3>Graveyard Ban</h3>
     <div class="ban-status" id="gyBanStatus">Loading...</div>
+    <div class="ban-row">
+      <div class="ban-row-left">
+        <div class="form-group">
+          <label>Ban for</label>
+          <input id="f-gy-ban-amount" type="number" min="1" step="1" placeholder="e.g. 24">
+        </div>
+        <div class="form-group form-group-narrow">
+          <label>Unit</label>
+          <select id="f-gy-ban-unit">
+            <option value="minutes">Minutes</option>
+            <option value="hours" selected>Hours</option>
+            <option value="days">Days</option>
+          </select>
+        </div>
+        <div class="form-group form-group-narrow checkbox-group-wrap">
+          <label>Permanent</label>
+          <input id="f-gy-permanent" type="checkbox" class="checkbox-group">
+        </div>
+      </div>
+      <div class="ban-row-right">
+        <button class="ban-btn" onclick="banGraveyard()">Ban</button>
+        <button class="unban-btn" onclick="unbanGraveyard()">Unban</button>
+      </div>
+    </div>
+
+    <h3>Server Permissions</h3>
     <div class="form-row">
       <div class="form-group">
-        <label>Ban for</label>
-        <input id="f-gy-ban-amount" type="number" min="1" step="1" placeholder="e.g. 24">
-      </div>
-      <div class="form-group form-group-narrow">
-        <label>Unit</label>
-        <select id="f-gy-ban-unit">
-          <option value="minutes">Minutes</option>
-          <option value="hours" selected>Hours</option>
-          <option value="days">Days</option>
+        <label>Role</label>
+        <select id="f-role">
+          <option value="1">User</option>
+          <option value="2">Moderator</option>
+          <option value="3">Admin</option>
+          <option value="4">Core</option>
         </select>
       </div>
-      <div class="form-group form-group-narrow checkbox-group-wrap">
-        <label>Permanent</label>
-        <input id="f-gy-permanent" type="checkbox" class="checkbox-group">
-      </div>
       <div class="form-group form-group-narrow">
         <label>&nbsp;</label>
-        <button onclick="banGraveyard()">Ban</button>
-      </div>
-      <div class="form-group form-group-narrow">
-        <label>&nbsp;</label>
-        <button class="unban-btn" onclick="unbanGraveyard()">Unban</button>
+        <button class="save-btn" onclick="saveRole()">Save Role</button>
       </div>
     </div>
   </div>

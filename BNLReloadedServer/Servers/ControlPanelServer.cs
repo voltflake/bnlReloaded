@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Text.Json;
 using BNLReloadedServer.Database;
+using BNLReloadedServer.ProtocolHelpers;
 using BNLReloadedServer.Servers;
 namespace BNLReloadedServer.ControlPanel;
 
@@ -135,6 +136,12 @@ public sealed class ControlPanelServer : IDisposable
                 return;
             }
 
+            if (method == "POST" && path == "/api/reset")
+            {
+                await ServeReset(ctx);
+                return;
+            }
+
             if (method == "GET" && path == "/api/players")
             {
                 await ServePlayerList(ctx);
@@ -153,6 +160,18 @@ public sealed class ControlPanelServer : IDisposable
                     await HandlePlayerUpdate(ctx, playerId);
                     return;
                 }
+            }
+
+            if (method == "GET" && path.StartsWith("/api/cards/"))
+            {
+                await ServeCard(ctx, Uri.UnescapeDataString(path["/api/cards/".Length..]));
+                return;
+            }
+
+            if (method == "GET" && path == "/api/logs")
+            {
+                await ServeLogs(ctx);
+                return;
             }
 
             ctx.Response.StatusCode = 404;
@@ -216,6 +235,17 @@ public sealed class ControlPanelServer : IDisposable
             ctx.Response.StatusCode = 500;
             await WriteJson(ctx, new { error = ex.Message });
         }
+    }
+
+    private static async Task ServeReset(HttpListenerContext ctx)
+    {
+        Console.WriteLine("Control panel: reset requested, shutting down (expecting the service to relaunch)...");
+        await WriteJson(ctx, new { message = "Server is shutting down and should be relaunched by the service shortly." });
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(300);
+            ShutdownSignal.Request();
+        });
     }
 
     private void RefreshCatalogue()
@@ -287,10 +317,138 @@ public sealed class ControlPanelServer : IDisposable
             matchmaker_ban_end = player.MatchmakerBanEnd,
             graveyard_permanent = player.GraveyardPermanent,
             graveyard_leave_time = player.GraveyardLeaveTime,
-            friend_count = player.Friends.Count
+            friends = player.Friends,
+            friend_requests_incoming = player.RequestsFromFriends,
+            friend_requests_outgoing = player.RequestsFromMe,
+            notification_count = player.Notifications.Count,
+            last_played_hero = player.LastPlayedHero.HasValue
+                ? player.LastPlayedHero.Value.GetCard<BaseTypes.CardUnit>()?.Name?.Text
+                    ?? player.LastPlayedHero.Value.GetCard<BaseTypes.CardUnit>()?.Id
+                    ?? player.LastPlayedHero.Value.ToString()
+                : null,
+            badges = player.Badges.ToDictionary(
+                b => b.Key.ToString(),
+                b => b.Value.Select(key => key.GetCard<BaseTypes.CardBadge>()?.Name?.Text ?? key.GetCard<BaseTypes.CardBadge>()?.Id ?? key.ToString())),
+            hero_stats = player.HeroStats.Select(h => new
+            {
+                hero = h.Hero.GetCard<BaseTypes.CardUnit>()?.Name?.Text ?? h.Hero.GetCard<BaseTypes.CardUnit>()?.Id ?? h.Hero.ToString(),
+                wins = h.Wins,
+                total_matches = h.TotalMatches
+            }),
+            match_history = player.MatchHistory
+                .OrderByDescending(m => m.MatchEndTime)
+                .Select(m => new
+                {
+                    hero = m.HeroKey.GetCard<BaseTypes.CardUnit>()?.Name?.Text ?? m.HeroKey.GetCard<BaseTypes.CardUnit>()?.Id ?? m.HeroKey.ToString(),
+                    map = m.MapKey.GetCard<BaseTypes.CardMap>()?.Name?.Text ?? m.MapKey.GetCard<BaseTypes.CardMap>()?.Id ?? m.MapKey.ToString(),
+                    game_mode = m.GameModeKey.GetCard<BaseTypes.CardGameMode>()?.Name ?? m.GameModeKey.GetCard<BaseTypes.CardGameMode>()?.Id ?? m.GameModeKey.ToString(),
+                    end_time = m.MatchEndTime,
+                    duration_seconds = m.MatchSeconds,
+                    is_winner = m.IsWinner,
+                    is_backfiller = m.IsBackfiller,
+                    is_quit = m.IsQuit,
+                    resources_earned = m.ResourcesEarned,
+                    blocks_built = m.BlocksBuilt,
+                    block_assist = m.BlockAssist,
+                    destruction = m.Destruction,
+                    objective_damage = m.ObjectiveDamage,
+                    kill = m.Kill,
+                    death = m.Death,
+                    assist = m.Assist
+                }),
+            time_trial = new
+            {
+                completed_goal_count = player.TimeTrial.CompletedGoals?.Count ?? 0,
+                best_result_count = player.TimeTrial.BestResultTime?.Count ?? 0,
+                reset_time = player.TimeTrial.ResetTime
+            },
+            loadouts = player.HeroLoadouts.Values.Select(DescribeLoadout)
         };
 
         await WriteJson(ctx, data);
+    }
+
+    private static async Task ServeLogs(HttpListenerContext ctx)
+    {
+        await WriteJson(ctx, new { lines = ConsoleLogBuffer.GetAll() });
+    }
+
+    private static async Task ServeCard(HttpListenerContext ctx, string query)
+    {
+        var card = uint.TryParse(query, out var hash)
+            ? Databases.Catalogue.All.FirstOrDefault(c => c.Key.Hash == hash)
+            : Databases.Catalogue.All.FirstOrDefault(c => string.Equals(c.Id, query, StringComparison.OrdinalIgnoreCase));
+
+        if (card == null)
+        {
+            ctx.Response.StatusCode = 404;
+            await WriteJson(ctx, new { error = "Card not found" });
+            return;
+        }
+
+        var json = JsonSerializer.Serialize(card, card.GetType(), JsonHelper.DefaultSerializerSettings);
+        ctx.Response.ContentType = "application/json; charset=utf-8";
+        var buf = System.Text.Encoding.UTF8.GetBytes(json);
+        ctx.Response.ContentLength64 = buf.Length;
+        await ctx.Response.OutputStream.WriteAsync(buf);
+        ctx.Response.OutputStream.Close();
+    }
+
+    private static object DescribeLoadout(BaseTypes.LobbyLoadout loadout)
+    {
+        var heroCard = loadout.HeroKey.GetCard<BaseTypes.CardUnit>();
+        var heroSkinCard = loadout.SkinKey.GetCard<BaseTypes.CardSkin>();
+
+        return new
+        {
+            hero = heroCard?.Name?.Text ?? heroCard?.Id ?? loadout.HeroKey.ToString(),
+            skin = heroSkinCard?.Name?.Text ?? heroSkinCard?.Id,
+            devices = Enumerable.Range(1, 6).Select(slot =>
+            {
+                if (loadout.Devices == null || !loadout.Devices.TryGetValue(slot, out var deviceKey))
+                    return new { slot, name = "(empty)", variant = (string?)null };
+
+                var deviceCard = deviceKey.GetCard<BaseTypes.CardDevice>();
+                var groupCard = deviceCard?.GroupKey.GetCard<BaseTypes.CardDeviceGroup>();
+                var baseDeviceKey = groupCard?.Devices?.FirstOrDefault();
+                var baseDeviceCard = baseDeviceKey.HasValue ? baseDeviceKey.Value.GetCard<BaseTypes.CardDevice>() : null;
+
+                var variantName = deviceCard?.Name?.Text ?? deviceCard?.Id ?? deviceKey.ToString();
+                var className = baseDeviceCard?.Name?.Text ?? baseDeviceCard?.Id
+                    ?? groupCard?.Name?.Text ?? groupCard?.Id
+                    ?? variantName;
+
+                var hasVariant = baseDeviceCard != null && baseDeviceCard.Key != deviceCard?.Key;
+
+                return new { slot, name = className, variant = hasVariant ? variantName : null };
+            }),
+            perks = new[]
+            {
+                BaseTypes.PerkSlotType.Defensive,
+                BaseTypes.PerkSlotType.Offensive,
+                BaseTypes.PerkSlotType.Hero
+            }.Select(slotType =>
+            {
+                var equipped = loadout.Perks?
+                    .Select(key => (key, perkCard: key.GetCard<BaseTypes.CardPerk>()))
+                    .FirstOrDefault(p => p.perkCard?.SlotType == slotType);
+
+                if (equipped == null || equipped.Value.perkCard == null)
+                    return new { slot_type = slotType.ToString(), name = "(empty)", upside = (string?)null, downside = (string?)null };
+
+                var perkCard = equipped.Value.perkCard;
+                var description = perkCard.Description?.Text;
+                var parts = description?.Split(" / ", 2);
+
+                return new
+                {
+                    slot_type = slotType.ToString(),
+                    name = perkCard.Name?.Text ?? perkCard.Id ?? equipped.Value.key.ToString(),
+                    upside = parts?.ElementAtOrDefault(0),
+                    downside = parts?.ElementAtOrDefault(1)
+                };
+            })
+        };
     }
 
     private async Task HandlePlayerUpdate(HttpListenerContext ctx, uint playerId)

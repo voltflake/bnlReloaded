@@ -107,9 +107,56 @@ async function loadPlayer(id) {
     document.getElementById('f-mm-ban-amount').value = '';
     document.getElementById('f-gy-ban-amount').value = '';
     document.getElementById('f-gy-permanent').checked = false;
+
+    renderLoadouts(p.loadouts || []);
   } catch(e) {
     showToast('error', 'Failed to load player: ' + e.message);
   }
+}
+
+let currentLoadouts = [];
+
+function renderLoadouts(loadouts) {
+  currentLoadouts = loadouts;
+  const select = document.getElementById('f-loadout-select');
+  if (!loadouts.length) {
+    select.innerHTML = '<option value="">No loadouts</option>';
+    renderSelectedLoadout();
+    return;
+  }
+  select.innerHTML = loadouts.map((l, i) =>
+    '<option value="' + i + '">' + esc(l.hero) + '</option>').join('');
+  renderSelectedLoadout();
+}
+
+function renderSelectedLoadout() {
+  const detail = document.getElementById('loadoutDetail');
+  const select = document.getElementById('f-loadout-select');
+  const l = currentLoadouts[parseInt(select.value)];
+  if (!l) {
+    detail.innerHTML = '<p class="ban-status clear">No loadouts</p>';
+    return;
+  }
+  const devices = (l.devices || []).map(d =>
+    '<div class="slot-row"><span class="slot-num">' + d.slot + '</span>' + esc(d.name) +
+    (d.variant ? ' <span class="device-variant">(' + esc(d.variant) + ')</span>' : '') + '</div>').join('');
+  const perks = (l.perks || []).map(pk =>
+    '<div class="perk-row">' +
+    (pk.slot_type ? '<span class="perk-badge perk-badge-' + esc(pk.slot_type) + '">' + esc(pk.slot_type) + '</span>' : '') +
+    '<div class="perk-name' + (pk.name === '(empty)' ? ' perk-empty' : '') + '">' + esc(pk.name) + '</div>' +
+    (pk.upside ? '<div class="perk-upside">+ ' + esc(pk.upside) + '</div>' : '') +
+    (pk.downside ? '<div class="perk-downside">&minus; ' + esc(pk.downside) + '</div>' : '') +
+    '</div>').join('');
+
+  const section = (title, cls, body) =>
+    '<div class="loadout-section loadout-section-' + cls + '">' +
+    '<div class="loadout-section-title">' + title + '</div>' + body + '</div>';
+
+  detail.innerHTML = '<div class="loadout-card">' +
+    (l.skin ? section('Character Skin', 'skin', '<p class="skin-value">' + esc(l.skin) + '</p>') : '') +
+    (devices ? section('Block Loadout', 'blocks', devices) : '') +
+    (perks ? section('Selected Perks', 'perks', perks) : '') +
+    '</div>';
 }
 
 async function updatePlayer(body, successMsg) {
@@ -139,12 +186,17 @@ function durationMs(amountId, unitId) {
   return amount * UNIT_MS[document.getElementById(unitId).value];
 }
 
-function saveRoleMmr() {
+function saveRole() {
   updatePlayer({
-    role_id: parseInt(document.getElementById('f-role').value),
+    role_id: parseInt(document.getElementById('f-role').value)
+  }, 'Role updated');
+}
+
+function saveMmr() {
+  updatePlayer({
     rating_mean: parseFloat(document.getElementById('f-mmr').value),
     rating_deviation: parseFloat(document.getElementById('f-rating-dev').value)
-  }, 'Role & MMR updated');
+  }, 'MMR updated');
 }
 
 function banMatchmaking() {
@@ -186,6 +238,53 @@ function esc(s) {
   return d.innerHTML;
 }
 
+async function lookupCard() {
+  const query = document.getElementById('f-card-query').value.trim();
+  const result = document.getElementById('cardResult');
+  if (!query) { showToast('error', 'Enter a card ID or key hash'); return; }
+  result.textContent = 'Loading...';
+  try {
+    const res = await fetch('/api/cards/' + encodeURIComponent(query));
+    if (!res.ok) {
+      const data = await res.json();
+      result.textContent = '';
+      showToast('error', data.error || 'Card not found');
+      return;
+    }
+    const data = await res.json();
+    result.textContent = JSON.stringify(data, null, 2);
+  } catch(e) {
+    result.textContent = '';
+    showToast('error', e.message);
+  }
+}
+
+async function resetServer() {
+  if (!confirm('This shuts down the server process, disconnecting all players. The service is expected to relaunch it automatically. Continue?')) return;
+  const btn = event.target;
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/reset', { method: 'POST' });
+    const data = await res.json();
+    showToast(res.ok ? 'success' : 'error', data.message || data.error || 'Done');
+  } catch(e) {
+    showToast('error', e.message);
+  }
+  setTimeout(() => { btn.disabled = false; }, 3000);
+}
+
+async function pollLogs() {
+  try {
+    const res = await fetch('/api/logs');
+    const data = await res.json();
+    const out = document.getElementById('consoleOutput');
+    out.textContent = (data.lines || []).join('\n');
+    if (document.getElementById('f-console-autoscroll').checked) {
+      out.scrollTop = out.scrollHeight;
+    }
+  } catch { /* ignore */ }
+}
+
 async function refreshStatus() {
   try {
     const res = await fetch('/api/status');
@@ -199,5 +298,7 @@ document.addEventListener('keydown', e => {
 });
 
 setInterval(refreshStatus, 5000);
+setInterval(pollLogs, 1000);
 refreshStatus();
+pollLogs();
 loadPlayers();
