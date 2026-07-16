@@ -315,26 +315,20 @@ public class GameInstance : IGameInstance
         {
             var rnd = new Random();
             var mapGrabCount = gameMode.SelectionMapsCount;
-            List<Key> mapKeys;
             var defaultMapList = CatalogueHelper.GetCards<CardMap>(CardCategory.Map).Select(map => map.Key).ToArray();
-            switch (gameMode.Ranking)
+            var mapPool = gameMode.Ranking switch
             {
-                case GameRankingType.Friendly:
-                case GameRankingType.Graveyard:
-                    mapKeys = rnd.GetItems(CatalogueHelper.MapList.Friendly?.ToArray() ?? defaultMapList, mapGrabCount).ToList();
-                    break;
-                case GameRankingType.Ranked:
-                    mapKeys = rnd.GetItems(CatalogueHelper.MapList.Ranked?.ToArray() ?? defaultMapList, mapGrabCount).ToList();
-                    break;
-                case GameRankingType.None:
-                default:
-                    mapKeys = rnd.GetItems(CatalogueHelper.MapList.Custom?.ToArray() ?? defaultMapList, mapGrabCount).ToList();
-                    break;
-            }
+                GameRankingType.Friendly or GameRankingType.Graveyard => CatalogueHelper.MapList.Friendly?.ToArray() ?? defaultMapList,
+                GameRankingType.Ranked => CatalogueHelper.MapList.Ranked?.ToArray() ?? defaultMapList,
+                GameRankingType.None or _ => CatalogueHelper.MapList.Custom?.ToArray() ?? defaultMapList,
+            };
+
+            rnd.Shuffle(mapPool);
+            var mapKeys = mapPool.Take(mapGrabCount).ToList();
             maps = mapKeys.Where(k => k.GetCard<CardMap>() is not null)
                 .Select(MapInfo (key) => new MapInfoCard { MapKey = key }).ToList();
         }
-        
+
         if (MapData != null)
         {
             MatchKey = CatalogueHelper.GetMatch(MapData.Match, gameMode.Key)?.Key ?? gameMode.MatchMode;
