@@ -712,7 +712,11 @@ public partial class GameZone : Updater
         _serviceZone.SendUpdateBarriers(GetBarriersForPhase(nextPhase));
 
         var buildPhaseDamageKey = new Key("effect_build_phase_extra_world_damage");
-        if (nextPhase is ZonePhaseType.Build or ZonePhaseType.Build2)
+        if (Databases.Catalogue.GetCard<CardEffect>(buildPhaseDamageKey) == null)
+        {
+            Console.WriteLine($"[GameZone] effect '{buildPhaseDamageKey}' not found in catalogue, skipping build phase world damage effect");
+        }
+        else if (nextPhase is ZonePhaseType.Build or ZonePhaseType.Build2)
         {
             foreach (var player in _playerUnits.Values)
             {
