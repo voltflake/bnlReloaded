@@ -57,8 +57,6 @@ public class CouchCatalogueStore(
             if (card != null) cards.Add(card);
         }
 
-        Console.WriteLine($"Loaded {cards.Count} cards from remote database");
-
         // Add maps
         AddMaps(cards, maps, extraMaps);
 

@@ -84,6 +84,25 @@ if (runServer)
     regionClient.ConnectAsync();
     matchServer.Start();
 
+    if (useCouch)
+    {
+        var watcherCts = new CancellationTokenSource();
+        ShutdownSignal.WaitForShutdown.ContinueWith(_ => watcherCts.Cancel());
+
+        var couchWatcher = new CouchChangesWatcher(
+            configs.CouchDbEndpoint(),
+            configs.CouchDbDatabaseName(),
+            configs.CouchDbCredentials(),
+            () =>
+            {
+                var newCardList = catalogueStore.Load(Databases.MapDatabase.GetMapCards(), Databases.MapDatabase.GrabExtraMaps());
+                if (Databases.Catalogue is not ServerCatalogue serverCatalogue) return;
+                serverCatalogue.Replicate(newCardList);
+                new ServiceCatalogue(new ServerSender(regionServer)).SendReplicate(newCardList);
+            });
+        couchWatcher.Start(watcherCts.Token);
+    }
+
     ControlPanelServer? controlPanel = null;
     if (Databases.ConfigDatabase.ControlPanelEnabled())
     {
