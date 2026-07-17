@@ -121,5 +121,7 @@ public class MapDatabase : IMapDatabase
         {
             mapDataWriter.Write(JsonSerializer.Serialize(mapData, JsonHelper.DefaultSerializerSettings));
         }
+
+        Console.WriteLine($"[MapEditor] Saved map '{key}' to {info.FullName}");
     }
 }

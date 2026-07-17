@@ -34,7 +34,7 @@ public class DummyGameInitiator(CardGameMode gameMode, MapData map, TeamType tea
 
     public float GetResourceAmount() => map.Properties?.StartingResources ?? MatchCard.InitResource;
 
-    public long? GetBuildPhaseEndTime(DateTimeOffset startTime) => 
+    public long? GetBuildPhaseEndTime(DateTimeOffset startTime) =>
         startTime.AddSeconds((long)(map.Properties?.BuildTime ?? MatchCard.Data switch
         {
             MatchDataShieldCapture matchDataShieldCapture => matchDataShieldCapture.Build1Time,

@@ -58,7 +58,7 @@ public class ServiceMapEditor(ISender sender) : IServiceMapEditor
         var key = reader.ReadString();
 
         var mapData = Databases.MapDatabase.LoadMapData(new Key(key));
-        SendLoadMap(rpcId, mapData, mapData?.BlocksData, mapData?.ColorsData);
+        SendLoadMap(rpcId, mapData, mapData?.BlocksData, mapData?.ColorsData, mapData == null ? $"Map '{key}' not found" : null);
     }
 
     public void SendSaveMap(ushort rpcId, string? error = null)
@@ -83,6 +83,28 @@ public class ServiceMapEditor(ISender sender) : IServiceMapEditor
         var rpcId = reader.ReadUInt16();
         var key = reader.ReadString();
         var map = MapData.ReadRecord(reader);
+
+        var card = Databases.MapDatabase.LoadMapCard(new Key(key));
+        if (card == null)
+        {
+            card = new CardMap
+            {
+                Key = new Key(key),
+                Id = key,
+                Name = new LocalizedString { Text = key }
+            };
+        }
+
+        try
+        {
+            Databases.MapDatabase.SaveMap(key, card, map);
+            SendSaveMap(rpcId);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"[MapEditor] Failed to save map '{key}': {e}");
+            SendSaveMap(rpcId, $"Failed to save map '{key}': {e.Message}");
+        }
     }
 
     public void SendLoadMetadata(ushort rpcId, HerculesMetadata? metadata, string? error = null)
@@ -162,7 +184,7 @@ public class ServiceMapEditor(ISender sender) : IServiceMapEditor
     {
         var rpcId = reader.ReadUInt16();
         var signedMap = reader.ReadString();
-        
+
         var handler = new JsonWebTokenHandler();
         var jsonWebToken = handler.ReadJsonWebToken(signedMap);
             
@@ -200,7 +222,7 @@ public class ServiceMapEditor(ISender sender) : IServiceMapEditor
     {
         var rpcId = reader.ReadUInt16();
         var map = MapData.ReadRecord(reader);
-        
+
         SendCheckMap(rpcId);
     }
 
@@ -232,7 +254,7 @@ public class ServiceMapEditor(ISender sender) : IServiceMapEditor
         var map = MapData.ReadRecord(reader);
         var hero = Key.ReadRecord(reader);
         var team = reader.ReadByteEnum<TeamType>();
-        
+
         SendPlayMapData(rpcId);
         if (sender.AssociatedPlayerId.HasValue)
         {
@@ -260,11 +282,6 @@ public class ServiceMapEditor(ISender sender) : IServiceMapEditor
         if (Enum.IsDefined(typeof(ServiceMapEditorId), serviceMapEditorId))
         {
             mapEditorEnum = (ServiceMapEditorId)serviceMapEditorId;
-        }
-
-        if (Databases.ConfigDatabase.DebugMode())
-        {
-            Console.WriteLine($"ServiceMapEditorId: {mapEditorEnum.ToString()}");
         }
 
         switch (mapEditorEnum)
