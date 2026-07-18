@@ -1515,7 +1515,8 @@ public partial class GameZone : Updater
     {
         var newMapBlocks = MapBinary.GetContainedInUnit(unit, 0);
         var newInsideBlocks = newMapBlocks.Where(b =>
-            MapBinary[b].Card.Special is BlockSpecialInsideEffect && MapBinary.GetIsActuallyInside(unit, b)).ToList();
+            MapBinary.ContainsBlock(b) && MapBinary[b].Card.Special is BlockSpecialInsideEffect &&
+            MapBinary.GetIsActuallyInside(unit, b)).ToList();
         var exitingBlocks = unit.OverlappingMapBlocks.Except(newInsideBlocks);
         unit.UpdateMapBlocks(newMapBlocks);
         

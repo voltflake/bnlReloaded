@@ -634,16 +634,11 @@ public class MapBinary
         {
             foreach (var (max, min) in UnitSizeHelper.GetUnitBounds(unit, stepCount, withSize, withExtraStep))
             {
-                if (!ContainsBlock(min) && !ContainsBlock(max))
+                for (var x = min.x; x <= max.x; x++)
                 {
-                    continue;
-                }
-
-                for (var x = Math.Clamp(min.x, 0, SizeX - 1); x <= Math.Clamp(max.x, 0, SizeX - 1); x++)
-                {
-                    for (var y = Math.Clamp(min.y, 0, SizeY - 1); y <= Math.Clamp(max.y, 0, SizeY - 1); y++)
+                    for (var y = min.y; y <= max.y; y++)
                     {
-                        for (var z = Math.Clamp(min.z, 0, SizeZ - 1); z <= Math.Clamp(max.z, 0, SizeZ - 1); z++)
+                        for (var z = min.z; z <= max.z; z++)
                         {
                             contained.Add(new Vector3s(x, y, z));
                         }
@@ -651,32 +646,27 @@ public class MapBinary
                 }
             }
         }
-        
+
         return contained;
     }
-    
+
     public HashSet<Vector3s> GetContainedInUnit(Unit unit, uint stepCount = 2, bool withSize = false, bool withExtraStep = false)
     {
         var contained = new HashSet<Vector3s>();
         foreach (var (max, min) in UnitSizeHelper.GetUnitBounds(unit, stepCount, withSize, withExtraStep))
         {
-            if (!ContainsBlock(min) && !ContainsBlock(max))
+            for (var x = min.x; x <= max.x; x++)
             {
-                continue;
-            }
-
-            for (var x = Math.Clamp(min.x, 0, SizeX - 1); x <= Math.Clamp(max.x, 0, SizeX - 1); x++)
-            {
-                for (var y = Math.Clamp(min.y, 0, SizeY - 1); y <= Math.Clamp(max.y, 0, SizeY - 1); y++)
+                for (var y = min.y; y <= max.y; y++)
                 {
-                    for (var z = Math.Clamp(min.z, 0, SizeZ - 1); z <= Math.Clamp(max.z, 0, SizeZ - 1); z++)
+                    for (var z = min.z; z <= max.z; z++)
                     {
                         contained.Add(new Vector3s(x, y, z));
                     }
                 }
             }
         }
-        
+
         return contained;
     }
     
@@ -1036,10 +1026,12 @@ public class MapBinary
         
         foreach (var startBlock in locations.Select(l => (Vector3s)l))
         {
-            if (!ContainsBlock(startBlock)) continue;
-            var startBlockData = this[startBlock];
-            if (!startBlockData.Card.Destructible && startBlockData.Card.Solid && !damage.IgnoreInvincibility) continue;
-            
+            if (ContainsBlock(startBlock))
+            {
+                var startBlockData = this[startBlock];
+                if (!startBlockData.Card.Destructible && startBlockData.Card.Solid && !damage.IgnoreInvincibility) continue;
+            }
+
             var startDirCount = new bool[6];
             Array.Fill(startDirCount, true);
             blockQueue.Enqueue((new SplashDamagePropagation(startBlock, startDirCount), 0), 0);
@@ -1076,13 +1068,14 @@ public class MapBinary
                 unitsForBlock.Remove(propInfo.prop.Position);
             }
             
-            var blk = this[propInfo.prop.Position];
-            var blkCard = blk.Card;
+            var inBounds = ContainsBlock(propInfo.prop.Position);
+            var blk = inBounds ? this[propInfo.prop.Position] : default;
+            var blkCard = inBounds ? blk.Card : null;
             var dmgTaken = 0.0f;
             var checkOpenFaces = false;
             var onlyOpenFaces = false;
-            var oldVdata = blk.VData;
-            if (blkCard.Health?.MaxHealth > 0)
+            var oldVdata = inBounds ? blk.VData : 0;
+            if (inBounds && blkCard!.Health?.MaxHealth > 0)
             {
                 if (dmg.BlockDamage == 0)
                 {
@@ -1128,8 +1121,8 @@ public class MapBinary
                 }
             }
 
-            var newReduction = dmgReduction + naturalFalloff + 
-                               (blkCard.SplashFalloff > 0
+            var newReduction = dmgReduction + naturalFalloff +
+                               (blkCard is { SplashFalloff: > 0 }
                                    ? blkCard.SplashFalloff / 100f
                                    : 0) +
                                (dmgTaken > 0 ? dmgTaken / damage.BlockDamage : 0);
@@ -1141,7 +1134,7 @@ public class MapBinary
                 if (!dir) continue;
                 var direction = CoordsHelper.FaceToVector[index];
                 var newPos = direction + propInfo.prop.Position;
-                if (visitedBlocks.Contains(newPos) || !ContainsBlock(newPos))
+                if (visitedBlocks.Contains(newPos))
                 {
                     continue;
                 }
@@ -1158,22 +1151,22 @@ public class MapBinary
                     continue;
                 }
                 
-                var newBlock = this[newPos];
-                var newBlockCard = newBlock.Card;
+                var newInBounds = ContainsBlock(newPos);
+                var newBlockCard = newInBounds ? this[newPos].Card : null;
 
                 var closestPoint = Vector3.Clamp(locations[0], newPos.ToVector3(), (newPos + Vector3s.One).ToVector3());
                 if (Vector3.DistanceSquared(closestPoint, locations[0]) > radiusSqrd ||
-                    (!newBlockCard.Destructible && newBlockCard.Solid && !damage.IgnoreInvincibility))
+                    (newBlockCard is { Destructible: false, Solid: true } && !damage.IgnoreInvincibility))
                 {
                     visitedBlocks.Add(newPos);
                     continue;
                 }
-                
+
                 var newDirCount = propInfo.prop.CanGoDir
                     .Select((c, idx) => c && idx != (int)CoordsHelper.OppositeFace[index]).ToArray();
-                
+
                 blockQueue.Enqueue((new SplashDamagePropagation(newPos, newDirCount), propInfo.travCount + 1),
-                    onlyOpenFaces || blkCard.Visual?.CanBePassedByShot is true || (checkOpenFaces &&
+                    onlyOpenFaces || blkCard?.Visual?.CanBePassedByShot is true || (checkOpenFaces &&
                         oldVdata is var vdata && !(blkCard switch
                     {
                         { IsVisualSlope: true } => SlopeBuilder.SidesCorners[index].All(c =>
