@@ -28,4 +28,5 @@ public class Configs
     public bool ControlPanelEnabled { get; init; }
     public string ControlPanelHost { get; init; } = "127.0.0.1";
     public int ControlPanelPort { get; init; } = 8080;
+    public string? ControlPanelPasswordHash { get; init; }
 }

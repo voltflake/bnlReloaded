@@ -71,4 +71,6 @@ public class DummyConfigDatabase : IConfigDatabase
     public string ControlPanelHost() => "127.0.0.1";
     
     public int ControlPanelPort() => 8080;
+
+    public string ControlPanelPasswordHash() => BNLReloadedServer.ControlPanel.PasswordHasher.Hash("test");
 }

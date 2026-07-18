@@ -1,6 +1,52 @@
 let allPlayers = [];
 let currentPlayerId = null;
 
+function showLoginGate(message) {
+  document.getElementById('loginGate').classList.add('active');
+  document.getElementById('loginError').textContent = message || '';
+}
+
+function hideLoginGate() {
+  document.getElementById('loginGate').classList.remove('active');
+}
+
+async function doLogin() {
+  const input = document.getElementById('loginPassword');
+  const password = input.value;
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      input.value = '';
+      hideLoginGate();
+      init();
+    } else {
+      document.getElementById('loginError').textContent = data.error || 'Login failed';
+    }
+  } catch (e) {
+    document.getElementById('loginError').textContent = e.message;
+  }
+}
+
+async function doLogout() {
+  try { await fetch('/api/logout', { method: 'POST' }); } catch { /* ignore */ }
+  location.reload();
+}
+
+const _origFetch = window.fetch.bind(window);
+window.fetch = async function(input, init) {
+  const res = await _origFetch(input, init);
+  const url = typeof input === 'string' ? input : input.url;
+  if (res.status === 401 && !url.includes('/api/login')) {
+    showLoginGate();
+  }
+  return res;
+};
+
 function showPlayerEdit(id) {
   currentPlayerId = id;
   document.getElementById('view-player').classList.add('active');
@@ -297,8 +343,24 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && currentPlayerId != null) closePlayerEdit();
 });
 
-setInterval(refreshStatus, 5000);
-setInterval(pollLogs, 1000);
-refreshStatus();
-pollLogs();
-loadPlayers();
+let initialized = false;
+function init() {
+  if (initialized) return;
+  initialized = true;
+  setInterval(refreshStatus, 5000);
+  setInterval(pollLogs, 1000);
+  refreshStatus();
+  pollLogs();
+  loadPlayers();
+}
+
+(async function start() {
+  try {
+    const res = await _origFetch('/api/status');
+    if (res.status === 401) {
+      showLoginGate();
+      return;
+    }
+    init();
+  } catch { /* ignore */ }
+})();

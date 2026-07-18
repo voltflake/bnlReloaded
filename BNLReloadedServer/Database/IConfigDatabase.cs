@@ -31,4 +31,5 @@ public interface IConfigDatabase
     public bool ControlPanelEnabled();
     public string ControlPanelHost();
     public int ControlPanelPort();
+    public string ControlPanelPasswordHash();
 }

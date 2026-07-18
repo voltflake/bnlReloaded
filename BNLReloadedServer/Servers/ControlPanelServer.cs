@@ -1,5 +1,7 @@
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text.Json;
 using BNLReloadedServer.Database;
 using BNLReloadedServer.ProtocolHelpers;
@@ -8,6 +10,11 @@ namespace BNLReloadedServer.ControlPanel;
 
 public sealed class ControlPanelServer : IDisposable
 {
+    private const string SessionCookieName = "cp_session";
+    private static readonly TimeSpan SessionDuration = TimeSpan.FromHours(12);
+    private const int MaxFailedAttempts = 5;
+    private static readonly TimeSpan LockoutWindow = TimeSpan.FromMinutes(15);
+
     private readonly HttpListener _listener;
     private readonly CancellationTokenSource _cts = new();
     private readonly MasterServer? _masterServer;
@@ -16,6 +23,8 @@ public sealed class ControlPanelServer : IDisposable
     private readonly CatalogueStore _catalogueStore;
     private readonly ServerCatalogue _serverCatalogue;
     private readonly DateTime _startTime = DateTime.UtcNow;
+    private readonly ConcurrentDictionary<string, DateTime> _sessions = new();
+    private readonly ConcurrentDictionary<string, (int Count, DateTime WindowStart)> _failedAttempts = new();
     private Task? _listenTask;
 
     private static readonly JsonSerializerOptions JsonOptions = new()
@@ -43,6 +52,12 @@ public sealed class ControlPanelServer : IDisposable
 
     public void Start()
     {
+        if (string.IsNullOrEmpty(Databases.ConfigDatabase.ControlPanelPasswordHash()))
+        {
+            Console.WriteLine("Control panel: no control_panel_password_hash configured, refusing to start (would be unauthenticated).");
+            return;
+        }
+
         try
         {
             _listener.Start();
@@ -124,6 +139,26 @@ public sealed class ControlPanelServer : IDisposable
                 return;
             }
 
+            if (method == "POST" && path == "/api/login")
+            {
+                await HandleLogin(ctx);
+                return;
+            }
+
+            if (method == "POST" && path == "/api/logout")
+            {
+                HandleLogout(ctx);
+                await WriteJson(ctx, new { message = "OK" });
+                return;
+            }
+
+            if (!IsAuthenticated(ctx))
+            {
+                ctx.Response.StatusCode = 401;
+                await WriteJson(ctx, new { error = "Unauthorized" });
+                return;
+            }
+
             if (method == "GET" && path == "/api/status")
             {
                 await ServeStatus(ctx);
@@ -182,6 +217,118 @@ public sealed class ControlPanelServer : IDisposable
             ctx.Response.StatusCode = 500;
             await WriteJson(ctx, new { error = ex.Message });
         }
+    }
+
+    // The listener only binds to loopback, so the only caller that can ever reach it is the local
+    // nginx reverse proxy - trusting its forwarded-for header here does not open it up to spoofing
+    // from the internet the way it normally would on a directly-exposed listener.
+    private static string ClientIp(HttpListenerContext ctx)
+    {
+        var forwarded = ctx.Request.Headers["X-Real-IP"] ?? ctx.Request.Headers["X-Forwarded-For"];
+        if (!string.IsNullOrEmpty(forwarded))
+            return forwarded.Split(',')[0].Trim();
+
+        return ctx.Request.RemoteEndPoint?.Address.ToString() ?? "unknown";
+    }
+
+    private bool IsAuthenticated(HttpListenerContext ctx)
+    {
+        var cookie = ctx.Request.Cookies[SessionCookieName];
+        if (cookie == null || string.IsNullOrEmpty(cookie.Value))
+            return false;
+
+        if (!_sessions.TryGetValue(cookie.Value, out var expiry) || expiry <= DateTime.UtcNow)
+        {
+            _sessions.TryRemove(cookie.Value, out _);
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsLockedOut(string ip)
+    {
+        if (!_failedAttempts.TryGetValue(ip, out var entry))
+            return false;
+
+        if (DateTime.UtcNow - entry.WindowStart > LockoutWindow)
+        {
+            _failedAttempts.TryRemove(ip, out _);
+            return false;
+        }
+
+        return entry.Count >= MaxFailedAttempts;
+    }
+
+    private void RecordFailedAttempt(string ip)
+    {
+        _failedAttempts.AddOrUpdate(
+            ip,
+            _ => (1, DateTime.UtcNow),
+            (_, entry) => DateTime.UtcNow - entry.WindowStart > LockoutWindow
+                ? (1, DateTime.UtcNow)
+                : (entry.Count + 1, entry.WindowStart));
+    }
+
+    private async Task HandleLogin(HttpListenerContext ctx)
+    {
+        var ip = ClientIp(ctx);
+
+        if (IsLockedOut(ip))
+        {
+            Console.WriteLine($"Control panel: login blocked (too many failed attempts) from {ip} at {DateTime.UtcNow:o}");
+            ctx.Response.StatusCode = 429;
+            await WriteJson(ctx, new { error = "Too many failed attempts. Try again later." });
+            return;
+        }
+
+        using var reader = new StreamReader(ctx.Request.InputStream);
+        var body = await reader.ReadToEndAsync();
+
+        string? password = null;
+        try
+        {
+            using var doc = JsonDocument.Parse(body);
+            if (doc.RootElement.TryGetProperty("password", out var pw))
+                password = pw.GetString();
+        }
+        catch (JsonException)
+        {
+            // treated as an empty/invalid password below
+        }
+
+        var storedHash = Databases.ConfigDatabase.ControlPanelPasswordHash();
+        var match = PasswordHasher.Verify(password ?? string.Empty, storedHash);
+
+        if (!match)
+        {
+            RecordFailedAttempt(ip);
+            Console.WriteLine($"Control panel: failed login attempt from {ip} at {DateTime.UtcNow:o}");
+            ctx.Response.StatusCode = 401;
+            await WriteJson(ctx, new { error = "Invalid password" });
+            return;
+        }
+
+        _failedAttempts.TryRemove(ip, out _);
+
+        var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
+        var expiry = DateTime.UtcNow + SessionDuration;
+        _sessions[token] = expiry;
+
+        Console.WriteLine($"Control panel: successful login from {ip} at {DateTime.UtcNow:o}");
+
+        ctx.Response.Headers.Add("Set-Cookie",
+            $"{SessionCookieName}={token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age={(int)SessionDuration.TotalSeconds}");
+        await WriteJson(ctx, new { message = "OK" });
+    }
+
+    private void HandleLogout(HttpListenerContext ctx)
+    {
+        var cookie = ctx.Request.Cookies[SessionCookieName];
+        if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
+            _sessions.TryRemove(cookie.Value, out _);
+
+        ctx.Response.Headers.Add("Set-Cookie", $"{SessionCookieName}=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0");
     }
 
     private static readonly string ControlPanelFolderPath = Path.Combine(AppContext.BaseDirectory, "ControlPanel");

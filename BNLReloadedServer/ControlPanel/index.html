@@ -7,9 +7,18 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<div class="login-gate" id="loginGate">
+  <div class="login-box">
+    <h2>BNL Reloaded Control Panel</h2>
+    <input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()">
+    <button onclick="doLogin()">Log In</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
 <header class="topbar">
   <h1>BNL Reloaded</h1>
   <div class="status" id="status">Loading...</div>
+  <button class="logout-btn" onclick="doLogout()">Log Out</button>
 </header>
 
 <main class="container">

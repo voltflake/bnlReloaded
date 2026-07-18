@@ -88,4 +88,6 @@ public class ConfigDatabase : IConfigDatabase
     public string ControlPanelHost() => _configs.ControlPanelHost;
     
     public int ControlPanelPort() => _configs.ControlPanelPort;
+
+    public string ControlPanelPasswordHash() => _configs.ControlPanelPasswordHash ?? string.Empty;
 }

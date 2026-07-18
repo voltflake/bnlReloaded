@@ -8,6 +8,12 @@ using BNLReloadedServer.Service;
 using CouchDB.Driver;
 using CouchDB.Driver.Options;
 
+if (args is ["--hash-password", var passwordToHash])
+{
+    Console.WriteLine(PasswordHasher.Hash(passwordToHash));
+    return;
+}
+
 Console.SetOut(new BroadcastingTextWriter(Console.Out));
 
 var configs = Databases.ConfigDatabase;
