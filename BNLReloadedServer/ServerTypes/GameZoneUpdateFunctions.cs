@@ -501,6 +501,18 @@ public partial class GameZone
                         
                         DoBlockUpdate(updates);
                         unitSource.RemoveResources(instEffectBuildDevice.TotalCost);
+
+                        if (unitSource.Devices.Values.FirstOrDefault(d => d.DeviceKey == devCard.Key) is { } blockDevData &&
+                            blockCard.CostIncPerUnit is { } blockCostInc and > 0)
+                        {
+                            blockDevData.TotalCost += blockCostInc;
+                            blockDevData.CostInc += blockCostInc;
+                            unitSource.UpdateData(new UnitUpdate
+                            {
+                                Devices = unitSource.Devices
+                            });
+                        }
+
                         if (unitSource.PlayerId is not null)
                         {
                             unitSource.BuiltBlock(blockCard.DeviceType, instEffectBuildDevice.TotalCost);
