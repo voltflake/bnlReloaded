@@ -1427,4 +1427,36 @@ public partial class GameZone
                 break;
         }
     }
+
+    public void ReceivedDebugSpawnSupply(string? blockbusterCardId)
+    {
+        if (blockbusterCardId is null)
+        {
+            var supplyPosition = GetSupplyPosition(new SupplySequenceItem
+            {
+                Seconds = 0,
+                SupplyUnitKey = CatalogueHelper.SupplyDrop,
+                DropPointLabel = UnitLabel.DropPointResource
+            });
+
+            if (supplyPosition is not null)
+            {
+                CreateSupplyUnit(CatalogueHelper.SupplyDrop, supplyPosition.Value);
+            }
+            return;
+        }
+
+        var blockbusterKey = new Key(blockbusterCardId);
+        var bbPosition = GetSupplyPosition(new SupplySequenceItem
+        {
+            Seconds = 0,
+            SupplyUnitKey = blockbusterKey,
+            DropPointLabel = UnitLabel.DropPointBlockbuster
+        });
+
+        if (bbPosition is not null)
+        {
+            CreateSupplyUnit(blockbusterKey, bbPosition.Value);
+        }
+    }
 }

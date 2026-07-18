@@ -74,31 +74,42 @@ public class ServiceDebug(ISender sender) : IServiceDebug
                 SendExecute(rpcId, "success");
                 Databases.RegionServerDatabase.ForceStartMatch(sender.AssociatedPlayerId.Value);
                 break;
-            
+
             case "remove_barriers":
             case "skip_build_phase":
                 SendExecute(rpcId, "success");
                 GameInstance?.EditorCommand(sender.AssociatedPlayerId.Value, MapEditorCommand.SkipBuildPhase, true);
                 break;
-            
+
             case "die":
                 SendExecute(rpcId, "success");
                 GameInstance?.EditorCommand(sender.AssociatedPlayerId.Value, MapEditorCommand.KillPlayer, true);
                 break;
-            
+
             case "respawn_now":
                 SendExecute(rpcId, "success");
                 GameInstance?.EditorCommand(sender.AssociatedPlayerId.Value, MapEditorCommand.Respawn, true);
                 break;
-            
+
             case "reset_ability_coodown":
                 SendExecute(rpcId, "success");
                 GameInstance?.EditorCommand(sender.AssociatedPlayerId.Value, MapEditorCommand.ResetCooldowns, true);
                 break;
-            
+
             case "win_match":
                 SendExecute(rpcId, "success");
                 GameInstance?.EditorCommand(sender.AssociatedPlayerId.Value, MapEditorCommand.WinMatch, true);
+                break;
+
+            case "spawn_supply":
+                SendExecute(rpcId, "success");
+                GameInstance?.DebugSpawnSupply(null);
+                break;
+
+            case "exit_match":
+                SendExecute(rpcId, "success");
+                Databases.RegionServerDatabase.RemoveFromCustomGame(sender.AssociatedPlayerId.Value);
+                GameInstance?.PlayerLeftInstance(sender.AssociatedPlayerId.Value, KickReason.MatchQuit);
                 break;
         }
     }
@@ -126,6 +137,21 @@ public class ServiceDebug(ISender sender) : IServiceDebug
         var rpcId = reader.ReadUInt16();
         var cmd = reader.ReadString();
         var args = reader.ReadList<string, List<string>>(reader.ReadString);
+
+        if (!sender.AssociatedPlayerId.HasValue || Databases.PlayerDatabase.GetPlayerDataNoWait(sender.AssociatedPlayerId.Value)?.Role is not (PlayerRole.Core
+                or PlayerRole.Admin))
+        {
+            SendExecuteArgs(rpcId, "fail");
+            return;
+        }
+
+        switch (cmd)
+        {
+            case "spawn_blockbuster":
+                SendExecuteArgs(rpcId, "success");
+                GameInstance?.DebugSpawnSupply(args.Count > 0 ? args[0] : null);
+                break;
+        }
     }
 
     public void SendGetScreenshot(ushort rpcId)

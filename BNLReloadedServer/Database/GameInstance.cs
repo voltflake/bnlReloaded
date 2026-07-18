@@ -652,6 +652,9 @@ public class GameInstance : IGameInstance
     public void EditorCommand(uint playerId, MapEditorCommand command, bool force) =>
         Zone?.EnqueueAction(() => Zone?.ReceivedEditorCommand(playerId, command, force));
 
+    public void DebugSpawnSupply(string? blockbusterCardId) =>
+        Zone?.EnqueueAction(() => Zone?.ReceivedDebugSpawnSupply(blockbusterCardId));
+
     private void OnLoadTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         if(_startGameTimer == null) return;
