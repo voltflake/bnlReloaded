@@ -1038,7 +1038,7 @@ public class MapBinary
         {
             if (!ContainsBlock(startBlock)) continue;
             var startBlockData = this[startBlock];
-            if (!startBlockData.Card.Destructible && !damage.IgnoreInvincibility) continue;
+            if (!startBlockData.Card.Destructible && startBlockData.Card.Solid && !damage.IgnoreInvincibility) continue;
             
             var startDirCount = new bool[6];
             Array.Fill(startDirCount, true);
@@ -1163,7 +1163,7 @@ public class MapBinary
 
                 var closestPoint = Vector3.Clamp(locations[0], newPos.ToVector3(), (newPos + Vector3s.One).ToVector3());
                 if (Vector3.DistanceSquared(closestPoint, locations[0]) > radiusSqrd ||
-                    (!newBlockCard.Destructible && !damage.IgnoreInvincibility))
+                    (!newBlockCard.Destructible && newBlockCard.Solid && !damage.IgnoreInvincibility))
                 {
                     visitedBlocks.Add(newPos);
                     continue;
